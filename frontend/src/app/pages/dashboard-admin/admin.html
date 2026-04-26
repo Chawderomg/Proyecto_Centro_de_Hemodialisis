@@ -14,9 +14,12 @@
         Registrar Usuario
       </a>
       
-      <a class="nav-tab disabled">
+      <a class="nav-tab" 
+         routerLink="insumos-registrados" 
+         routerLinkActive="active-tab" 
+         [routerLinkActiveOptions]="{ exact: true }">
         <span class="tab-icon">📋</span>
-        Gestión de Pacientes
+        Insumos Registrados
       </a>
       <a routerLink="registrar-cat" 
          routerLinkActive="active-tab"
@@ -34,7 +37,7 @@
 
   <main class="admin-content">
     <header class="content-header">
-      <h2>Gestión de Personal</h2>
+      <h1>Panel Administrativo</h1>
     </header>
     <section class="view-container">
       <router-outlet></router-outlet>
