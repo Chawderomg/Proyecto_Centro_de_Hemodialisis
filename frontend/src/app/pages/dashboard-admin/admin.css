@@ -24,19 +24,19 @@
 
   /* Ancho fijo del menú */
   width: 280px;
-
   /* Color del menú */
-  background-color: #ffffff;
+  border-radius: 15px;
 
-  /* Línea separadora */
+  background: linear-gradient(
+        135deg,
+        #667eea,
+        #6bb4df,
+        #6b8dd6);
   border-right: 1px solid #cfd8dc;
-
   /* Organización vertical */
   display: flex;
   flex-direction: column;
-
   padding: 1.5rem 0;
-
   /* 🔥 MUY IMPORTANTE */
   /* Evita que el contenido tape el menú */
   position: relative;
@@ -48,22 +48,29 @@
 /* ENCABEZADO DEL SIDEBAR */
 /* ============================= */
 
-.sidebar-header {
+.sidebar-header{
 
   padding: 0 1.5rem 1.5rem;
-
-  border-bottom: 1px solid #eceff1;
-
-  color: #37474f;
-
-  font-weight: 600;
-
+  border-bottom: 3px solid #eceff1;
+  color: #f9f7f7;
   display: flex;
-
   align-items: center;
-
   gap: 10px;
 }
+.sidebar-header span {
+
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+
+    font-size: 22px;
+    font-weight: 600;
+
+    color: #ecf0f1;
+
+    letter-spacing: 0.5px;
+
+}
+
+
 
 
 /* ============================= */
@@ -74,7 +81,6 @@
 
   /* Hace que los tabs ocupen el espacio central */
   flex: 1;
-
   padding: 1rem 0;
 }
 
@@ -88,14 +94,13 @@
   display: flex;
 
   align-items: center;
-
   gap: 12px;
 
   padding: 12px 1.5rem;
 
   text-decoration: none;
 
-  color: #607d8b;
+  color: #ffffff;
 
   font-weight: 500;
 
