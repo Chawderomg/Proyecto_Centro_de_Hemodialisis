@@ -4,29 +4,42 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class InsumoService {
-  private API_URL_CREATE = 'http://localhost:3000/api/insumos/'; // POST
 
-  private API_URL_OBTENER = 'http://localhost:3000/api/insumos/getInsumos';
-
+  private API = 'http://localhost:3000/api/insumos';
+  private APILOTE = 'http://localhost:3000/api/lotes';
 
   constructor(private http: HttpClient) {}
 
   crearInsumo(datos: any): Observable<any> {
-    return this.http.post(this.API_URL_CREATE, datos);
+    return this.http.post(`${this.API}/`, datos);
   }
 
- // 🔹 Obtener todos los insumos
   getInsumos(): Observable<any> {
-    return this.http.get(this.API_URL_OBTENER);
+    return this.http.get(`${this.API}/getinsumos`);
   }
-   // 🔥 NUEVOS
 
   actualizarInsumo(id: number | null, datos: any): Observable<any> {
-    return this.http.put(`http://localhost:3000/api/insumos/${id}`, datos);
+    return this.http.put(`${this.API}/${id}`, datos);
   }
 
   eliminarInsumo(id: number): Observable<any> {
-    return this.http.delete(`http://localhost:3000/api/insumos/${id}`);
+    return this.http.delete(`${this.API}/${id}`);
   }
- 
+
+  getInsumosDashboard(): Observable<any> {
+    return this.http.get(`${this.API}/dashboard`);
+  }
+
+  getAlertasVencimiento(): Observable<any> {
+    return this.http.get(`${this.API}/vencimientos`);
+  }
+
+  getBajoStock(): Observable<any> {
+    return this.http.get(`${this.API}/bajo-stock`);
+    
+  }
+
+  crearLote(datos: any): Observable<any> {
+  return this.http.post(`${this.APILOTE}/Lotes`, datos);
+}
 }

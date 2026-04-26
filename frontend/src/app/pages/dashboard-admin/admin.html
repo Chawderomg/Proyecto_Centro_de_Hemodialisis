@@ -19,9 +19,14 @@
 
       </a>
 
-      <a class="nav-tab disabled">
+      <a routerLink="lotes" 
+         routerLinkActive="active-tab"
+         [routerLinkActiveOptions]="{ exact: true }"
+         class="nav-tab">
+
         <span class="tab-icon">📋</span>
-        <span *ngIf="!isCollapsed">Gestión de Pacientes</span>
+        <span *ngIf="!isCollapsed">Panel de Lotes</span>
+
       </a>
 
       <a routerLink="registrar-cat" 

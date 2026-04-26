@@ -1,0 +1,134 @@
+<div class="panel-lotes">
+  <div class="header">
+    <div class="header-left">
+      <h1>Dashboard de Lotes</h1>
+      <button class="btn-nuevo" (click)="abrirModal()">+ Reponer Stock</button>
+    </div>
+    
+    <div class="notificacion-container">
+      <button class="btn-campana" (click)="toggleNotificaciones()">
+        🛎️
+        <span *ngIf="totalAlertas > 0" class="badge">{{ totalAlertas }}</span>
+      </button>
+
+      <div *ngIf="mostrarNotificaciones" class="panel-notificaciones">
+        <h3>Notificaciones ({{ totalAlertas }})</h3>
+        
+        <div *ngIf="alertasVencimiento.length > 0" class="seccion-alerta">
+          <h4>📅 Próximos a vencer</h4>
+          <div class="alerta-item" *ngFor="let lote of alertasVencimiento">
+            <strong>{{ lote.insumo?.nombre || 'Insumo' }}</strong><br>
+            <small>Vence: {{ formatearFecha(lote.fecha_vencimiento) }}</small>
+          </div>
+        </div>
+
+        <div *ngIf="alertasBajoStock.length > 0" class="seccion-alerta">
+          <h4>⚠️ Stock Bajo</h4>
+          <div class="alerta-item" *ngFor="let item of alertasBajoStock">
+            <strong>{{ item.nombre }}</strong><br>
+            Actual: {{ item.stock_actual }}
+          </div>
+        </div>
+
+        <div *ngIf="totalAlertas === 0" class="sin-alertas">
+          ✅ Todo en orden
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <h3>Insumos</h3>
+      <p class="numero">{{ insumos.length }}</p>
+    </div>
+    <div class="tarjeta">
+      <h3>Stock Bajo</h3>
+      <p class="numero rojo">{{ alertasBajoStock.length }}</p>
+    </div>
+    <div class="tarjeta">
+      <h3>Por Vencer</h3>
+      <p class="numero rojo">{{ alertasVencimiento.length }}</p>
+    </div>
+    <div class="tarjeta">
+      <h3>Stock Total</h3>
+      <p class="numero">{{ totalStock }}</p>
+    </div>
+  </div>
+
+  <div class="tabla-container">
+    <h2>Listado de Insumos</h2>
+
+    <div *ngIf="cargando" class="cargando">Obteniendo datos...</div>
+
+    <div *ngIf="!cargando">
+      <table *ngIf="insumos.length > 0; else sinDatos">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th class="text-center">Stock</th>
+            <th class="text-center">Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let insumo of insumos">
+            <td><strong>{{ insumo.codigo_interno }}</strong></td>
+            <td>{{ insumo.nombre }}</td>
+            <td class="text-center">{{ insumo.stock_total }}</td>
+            <td class="text-center">
+              <span *ngIf="insumo.alertaStock" class="estado bajo-stock">BAJO STOCK</span>
+              <span *ngIf="insumo.alertaVencimiento" class="estado por-vencer">POR VENCER</span>
+              <span *ngIf="!insumo.alertaStock && !insumo.alertaVencimiento" class="estado normal">OK</span>
+            </td>
+            <td>
+              <button class="btn-ver" (click)="verLotes(insumo)">Detalles</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #sinDatos><p>No se encontraron registros.</p></ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>📦 Reposición de Inventario</h2>
+      <button class="btn-cerrar" (click)="cerrarModal()">&times;</button>
+    </div>
+
+    <form [formGroup]="loteForm" (ngSubmit)="guardarLote()">
+      <div class="form-group">
+        <label>Insumo</label>
+        <select formControlName="id_insumo">
+          <option value="">-- Seleccione Insumo --</option>
+          <option *ngFor="let i of insumos" [value]="i.id_insumo">{{ i.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Número de Lote / Código de Referencia</label>
+        <input type="text" formControlName="numero_lote" placeholder="Ej: L-2024-001">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cantidad Inicial</label>
+          <input type="number" formControlName="cantidad_inicial" placeholder="0">
+        </div>
+        <div class="form-group">
+          <label>Vencimiento</label>
+          <input type="date" formControlName="fecha_vencimiento">
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-cancelar" (click)="cerrarModal()">Cerrar</button>
+        <button type="submit" class="btn-guardar" [disabled]="loteForm.invalid">Guardar Ingreso</button>
+      </div>
+    </form>
+  </div>
+</div>

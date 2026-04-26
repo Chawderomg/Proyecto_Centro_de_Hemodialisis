@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { createLote } from "../controllers/lote.controller.js";
+import { createLote } from "../controllers/lotes.controller.js";
 
 const router = Router();
 
 // Ruta para reponer stock (Crear nuevo lote)
-router.post("/", createLote);
+router.post("/Lotes", createLote);
 
 export default router;
