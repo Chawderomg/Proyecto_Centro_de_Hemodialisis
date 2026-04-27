@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-admin-dashboard',
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
- 
   templateUrl: './admin.html',
   styleUrl: './admin.css'
 })
@@ -14,7 +13,6 @@ export class AdminDashboard {
 
   isCollapsed = false;
   titulo = 'Panel Administrativo';
-   mostrarModal = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
@@ -24,20 +22,32 @@ export class AdminDashboard {
         this.titulo = 'Gestión de Usuarios';
       } else if (url.includes('registrar-cat')) {
         this.titulo = 'Registro de Insumos';
+      } else if (url.includes('panel-lotes')) {
+        this.titulo = 'Gestión de Lotes';
       } else {
         this.titulo = 'Panel Administrativo';
       }
     });
+
+    /*
+          const rutas: any = {
+        'registrar-usuario': 'Gestión de Usuarios',
+        'registrar-cat': 'Registro de Insumos',
+        'panel-lotes': 'Gestión de Lotes'
+      };
+
+      this.router.events.subscribe(() => {
+        const url = this.router.url;
+
+        this.titulo = Object.keys(rutas).find(r => url.includes(r))
+          ? rutas[Object.keys(rutas).find(r => url.includes(r))!]
+          : 'Panel Administrativo';
+      });
+      }
+     */
   }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
-  }
-   abrirModal() {
-    this.mostrarModal = true;
-  }
-
-  cerrarModal() {
-    this.mostrarModal = false;
   }
 }

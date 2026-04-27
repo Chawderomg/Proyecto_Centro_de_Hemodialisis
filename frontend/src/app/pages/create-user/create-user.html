@@ -7,7 +7,7 @@
   <!-- 🔹 BUSCADOR -->
   <input 
     type="text"
-    placeholder="Buscar insumo..."
+    placeholder="🔍 Buscar usuario..."
     [ngModel]="busqueda()"
     (ngModelChange)="busqueda.set($event)"
     class="input-search"
@@ -35,7 +35,7 @@
         <td>{{ getRolNombre(usuario.id_rol) }}</td>
 
         <!-- 🔥 AQUÍ VA -->
-        <td>
+        <td class="acciones">
           <button (click)="editarUsuario(usuario)">✏️</button>
           <button (click)="eliminarUsuario(usuario.id_usuario)">🗑️</button>
         </td>

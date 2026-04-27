@@ -42,9 +42,11 @@
     </nav>
 
     <div class="sidebar-footer">
-      <a routerLink="/" class="btn-logout">Cerrar Sesión</a>
+      <a routerLink="/" class="btn-logout">
+        <span>🚪</span>
+        <span *ngIf="!isCollapsed">Cerrar Sesión</span>
+      </a>
     </div>
-
   </aside>
 
   <main class="admin-content">
@@ -57,12 +59,10 @@
       <router-outlet></router-outlet>
     </section>
 
+    
+
   </main>
     <!-- MODAL -->
-
-
-
-
 
 
 </div>

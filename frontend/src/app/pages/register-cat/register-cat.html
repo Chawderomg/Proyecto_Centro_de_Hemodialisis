@@ -7,7 +7,7 @@
   <!-- 🔹 BUSCADOR -->
   <input 
     type="text"
-    placeholder="Buscar insumo..."
+    placeholder=" 🔍Buscar insumo..."
     [ngModel]="busqueda()"
     (ngModelChange)="busqueda.set($event)"
     class="input-search"
@@ -36,10 +36,11 @@
       <td>{{ insumo.stock_minimo }}</td>
 
       <!-- 🔥 AQUÍ VA -->
-      <td>
+      <td class="acciones">
         <button (click)="editarInsumo(insumo)">✏️</button>
         <button (click)="eliminarInsumo(insumo.id_insumo)">🗑️</button>
       </td>
+      
 
     </tr>
   }

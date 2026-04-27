@@ -10,6 +10,7 @@ select option {
   font-size: 1.5rem;
 }
 
+
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -30,6 +31,21 @@ input, select {
 }
 
 input,select:focus {
+  outline: none;
+  border-color: #546e7a;
+}
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+
+.form-group input:focus {
   outline: none;
   border-color: #546e7a;
 }
@@ -168,5 +184,12 @@ th {
   margin-top: 10px;
 }
 
+.acciones {
+  display: flex;
+  gap: 25px;
+}
 /*Funciones de nuebos implementos*/
+
+
+
 

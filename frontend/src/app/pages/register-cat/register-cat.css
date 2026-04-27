@@ -79,15 +79,17 @@
 }
 
 
-
 .btn-register {
-  background: #475569;
+  width: 40%;
+  padding: 10px;
+  background-color: #546e7a;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background 0.3s;
 }
 
 .btn-register:hover {
@@ -125,19 +127,6 @@
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  cursor: pointer;
-}
-/*boton de busqueda*/
-
-
-
-.btn-open {
-  
-  padding: 10px;
-  background: orange;
-  color: white;
-  border: none;
-  border-radius: 8px;
   cursor: pointer;
 }
 /* input de Busqqueda*/
@@ -229,17 +218,12 @@ th {
   justify-content: space-between;
   margin-top: 10px;
 }
-.btn-primary {
-  background: #ff7a00;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-}
-.btn-secondary {
-  background: #e0e0e0;
-  color: #333;
+
+.acciones {
+  display: flex;
+  gap: 25px;
 }
 /*Funciones de nuebos implementos*/
 .stock-bajo {
-  background-color: #fee2e2;
+  background-color: #c40e0e;
 }
