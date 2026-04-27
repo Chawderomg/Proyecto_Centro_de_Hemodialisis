@@ -1,85 +1,130 @@
-import { Component } from '@angular/core';
+import { Component, signal, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import {
-  ReactiveFormsModule,
-  FormGroup,
-  FormControl,
-  Validators
-} from '@angular/forms';
-
+import { FormsModule,FormGroup, FormControl, Validators  } from '@angular/forms';
 import { InsumoService } from '../../services/insumo.service';
+
+
 
 @Component({
   selector: 'app-register-cat',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule,],
   templateUrl: './register-cat.html',
   styleUrl: './register-cat.css',
 })
-export class RegistrarCat {
+export class RegistrarCat implements OnInit {
 
-  errorMessage = '';
-  successMessage = '';
+  codigoInterno = signal('');
+  nombre = signal('');
+  stockMinimo = signal(0);
+  errorMessage = signal('');
+  successMessage = signal('');
+  insumos = signal<any[]>([]);
+  mostrarModal = signal(false);
 
-  constructor(
-    private insumoService: InsumoService
-  ) {}
+  busqueda = signal('');
+  modoEdicion = signal(false);
+  idEditando = signal<number | null>(null);
 
-  insumoForm = new FormGroup({
+  constructor(private insumoService: InsumoService ) {}
 
-    codigo_interno: new FormControl('', [
-      Validators.required
-    ]),
+  ngOnInit() {
+    this.cargarInsumos();
+  }
 
-    nombre: new FormControl('', [
-      Validators.required
-    ]),
+  abrirModal() {
+    this.mostrarModal.set(true);
+  }
 
-    stock_minimo: new FormControl(0, [
-      Validators.required,
-      Validators.min(0)
-    ])
+  cerrarModal() {
+    this.mostrarModal.set(false);
+  }
+  
+  cargarInsumos() {
+    this.insumoService.getInsumos().subscribe({
+      next: (res: any) => {
+        this.insumos.set(res.data);
+      }
+    });
+  }
 
+  onRegister() {
+  this.errorMessage.set('');
+  this.successMessage.set('');
+
+  const insumo = {
+    codigo_interno: this.codigoInterno(),
+    nombre: this.nombre(),
+    stock_minimo: this.stockMinimo()
+  };
+
+  if (this.modoEdicion()) {
+    this.insumoService.actualizarInsumo(this.idEditando(), insumo).subscribe({
+      next: (res: any) => {
+        this.successMessage.set('Actualizado correctamente');
+        this.resetFormulario();
+      },
+      error: (err) => {
+        this.errorMessage.set(err.error?.message || 'Error al actualizar');
+      }
+    });
+  } else {
+    this.insumoService.crearInsumo(insumo).subscribe({
+      next: (res: any) => {
+        this.successMessage.set(res.message);
+        this.resetFormulario();
+      },
+      error: (err) => {
+        this.errorMessage.set(err.error?.message || 'Error al registrar');
+      }
+    });
+  }
+}
+resetFormulario() {
+  this.codigoInterno.set('');
+  this.nombre.set('');
+  this.stockMinimo.set(0);
+
+  this.modoEdicion.set(false);
+  this.idEditando.set(null);
+
+  this.cargarInsumos();
+  this.cerrarModal();
+}
+
+ 
+
+  insumosFiltrados = computed(() => {
+  const texto = this.busqueda().toLowerCase();
+
+  return this.insumos().filter(i =>
+    i.nombre.toLowerCase().includes(texto) ||
+    i.codigo_interno.toLowerCase().includes(texto)
+  );
   });
 
 
-  onSubmit() {
+  editarInsumo(insumo: any) {
+  this.modoEdicion.set(true);
+  this.idEditando.set(insumo.id_insumo);
 
-    if (this.insumoForm.valid) {
+  this.codigoInterno.set(insumo.codigo_interno);
+  this.nombre.set(insumo.nombre);
+  this.stockMinimo.set(insumo.stock_minimo);
 
-      this.insumoService
-        .crearInsumo(this.insumoForm.value)
-        .subscribe({
-
-          next: (res: any) => {
-
-            this.successMessage =
-              res.message ||
-              "Insumo registrado correctamente";
-
-            this.errorMessage = '';
-
-            this.insumoForm.reset({
-              stock_minimo: 0
-            });
-
-          },
-
-          error: (err) => {
-
-            this.errorMessage =
-              err.error.message ||
-              "Error al registrar insumo";
-
-            this.successMessage = '';
-
-          }
-
-        });
-
-    }
-
+  this.abrirModal();
   }
+eliminarInsumo(id: number) {
+  if (!confirm('¿Eliminar insumo?')) return;
+
+  this.insumoService.eliminarInsumo(id).subscribe({
+    next: () => {
+      this.cargarInsumos();
+    },
+    error: () => {
+      alert('Error al eliminar');
+    }
+  });
+}
 
 }
