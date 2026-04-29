@@ -1,13 +1,13 @@
 <div class="navbar-actions">
   <!-- 🔹 BOTÓN -->
   <button class="btn-open" (click)="abrirModal()">
-    + Registrar usuario
+    + Registrar Paciente
   </button>
 
   <!-- 🔹 BUSCADOR -->
   <input 
     type="text"
-    placeholder="🔍 Buscar usuario..."
+    placeholder="🔍 Buscar paciente..."
     [ngModel]="busqueda()"
     (ngModelChange)="busqueda.set($event)"
     class="input-search"
@@ -20,24 +20,22 @@
       <th>#</th>
       <th>Nombre</th>
       <th>CI</th>
-      <th>Rol</th>
       <th>Acciones</th>
     </tr>
   </thead>
 
   <tbody>
-    @for (usuario of usuariosFiltrados(); track usuario.id_usuario; let i = $index) {
+    @for (paciente of pacientesFiltrados(); track paciente.id_paciente; let i = $index) {
       <tr >
         <td>{{ i + 1 }}</td>
 
-        <td>{{ usuario.nombre_completo }}</td>
-        <td>{{ usuario.ci }}</td>
-        <td>{{ getRolNombre(usuario.id_rol) }}</td>
+        <td>{{ paciente.nombre_completo }}</td>
+        <td>{{ paciente.ci }}</td>
 
         <!-- 🔥 AQUÍ VA -->
         <td class="acciones">
-          <button (click)="editarUsuario(usuario)">✏️</button>
-          <button (click)="eliminarUsuario(usuario.id_usuario)">🗑️</button>
+          <button (click)="editarPaciente(paciente)">✏️</button>
+          <button (click)="eliminarPaciente(paciente.id_paciente)">🗑️</button>
         </td>
 
       </tr>
@@ -58,15 +56,15 @@
 
       <div class="card-header">
         <h2>Registro de Pacientes </h2>
-        <p>Asigne los datos básicos y el nivel de acceso al sistema.</p>
+        <p>Asigne los datos básicos del paciente</p>
       </div>
       
-      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="paciForm" (ngSubmit)="onSubmit()">
         
         <div class="form-group">
           <label>Nombre Completo</label>
-          <input type="text" formControlName="nombre_completo" placeholder="Ej. Ana Martínez">
-          @if (userForm.get('nombre_completo')?.invalid && userForm.get('nombre_completo')?.touched) {
+          <input type="text" formControlName="nombre_completo" placeholder="Ej. Rocio Ancaci">
+          @if (paciForm.get('nombre_completo')?.invalid && paciForm.get('nombre_completo')?.touched) {
             <small class="error-msg">El nombre es obligatorio (mín. 3 caracteres)</small>
           }
         </div>
@@ -74,27 +72,11 @@
         <div class="form-group">
           <label>Cédula de Identidad (CI)</label>
           <input type="text" formControlName="ci" placeholder="Ej. 1234567">
-          @if (userForm.get('ci')?.invalid && userForm.get('ci')?.touched) {
+          @if (paciForm.get('ci')?.invalid && paciForm.get('ci')?.touched) {
             <small class="error-msg">Ingrese un CI válido (solo números)</small>
           }
         </div>
 
-        <div class="form-group">
-          <label>Rol de Usuario</label>
-          <select formControlName="id_rol">
-            <option [value]="1">Administrador</option>
-            <option [value]="2">Almacén</option>
-            <option [value]="3">Enfermería</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Contraseña</label>
-          <input type="password" formControlName="password" placeholder="••••••••">
-          @if (userForm.get('password')?.invalid && userForm.get('password')?.touched) {
-            <small class="error-msg">La contraseña debe tener al menos 6 caracteres</small>
-          }
-        </div>
         
         @if (errorMessage()) {
           <p class="error-text">{{ errorMessage() }}</p>

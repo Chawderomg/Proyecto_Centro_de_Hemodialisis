@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, FormsModule, Validators } from '@angular/forms'; 
-import { UsuarioService } from '../../services/usuario.service';
+import { PacienteService } from '../../services/paciente.service';
 
 @Component({
   selector: 'app-create-paciente',
@@ -15,10 +15,10 @@ import { UsuarioService } from '../../services/usuario.service';
   
 export class CreatePaciente implements OnInit {
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private pacienteService: PacienteService) {}
 
   // 🔥 SIGNALS
-  usuarios = signal<any[]>([]);
+  pacientes = signal<any[]>([]);
   busqueda = signal('');
   mostrarModal = signal(false);
   modoEdicion = signal(false);
@@ -27,38 +27,35 @@ export class CreatePaciente implements OnInit {
   idEditando = signal<number | null>(null);
 
   // 🔥 FORM
-  userForm = new FormGroup({
+  paciForm = new FormGroup({
     nombre_completo: new FormControl('', [Validators.required]),
     ci: new FormControl('', [Validators.required]),
-    id_rol: new FormControl(3, [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    es_activo: new FormControl(true),
   });
 
   // 🔥 INIT
   ngOnInit() {
-    this.cargarUsuarios();
+    this.cargarPacientes();
   }
 
-  cargarUsuarios() {
-    this.usuarioService.getUsuarios().subscribe({
+  cargarPacientes() {
+    this.pacienteService.getPacientes().subscribe({
       next: (res: any) => {
-        this.usuarios.set(res.data);
+        this.pacientes.set(res.data);
       }
     });
   }
 
   // 🔍 FILTRO
- usuariosFiltrados = computed(() => {
+pacientesFiltrados = computed(() => {
   const texto = this.busqueda().toLowerCase();
 
-  return this.usuarios().filter(u => {
-    const nombre = u.nombre_completo?.toLowerCase() || '';
-    const ci = u.ci || '';
-    const rol = this.getRolNombre(u.id_rol).toLowerCase();
+  return this.pacientes().filter(p => {
+    const nombre = p.nombre_completo?.toLowerCase() || '';
+    const ci = p.ci || '';
+    
 
-    return nombre.includes(texto) ||
-           ci.includes(texto) ||
-           rol.includes(texto);
+    return nombre.includes(texto) || ci.includes(texto) 
     });
   });
 
@@ -70,41 +67,41 @@ export class CreatePaciente implements OnInit {
     this.mostrarModal.set(false);
   }
 
-  editarUsuario(usuario: any) {
+  editarPaciente(paciente: any) {
     this.modoEdicion.set(true);
-    this.idEditando.set(usuario.id_usuario);
+    this.idEditando.set(paciente.id_paciente);
 
-    this.userForm.patchValue({
-      nombre_completo: usuario.nombre_completo,
-      ci: usuario.ci,
-      id_rol: usuario.id_rol
+    this.paciForm.patchValue({
+      nombre_completo: paciente.nombre_completo,
+      ci: paciente.ci,
+      es_activo: paciente.es_activo,
     });
 
     this.abrirModal();
   }
 
-  eliminarUsuario(id: number) {
-    if (!confirm('¿Eliminar usuario?')) return;
+  eliminarPaciente(id: number) {
+    if (!confirm('¿Eliminar paciente?')) return;
 
-    this.usuarioService.eliminarUsuario(id).subscribe({
-      next: () => this.cargarUsuarios()
+    this.pacienteService.eliminarPaciente(id).subscribe({
+      next: () => this.cargarPacientes()
     });
   }
 
   onSubmit() {
-    if (this.userForm.invalid) return;
+    if (this.paciForm.invalid) return;
 
     if (this.modoEdicion()) {
-      this.usuarioService.actualizarUsuario(this.idEditando(), this.userForm.value).subscribe({
+      this.pacienteService.actualizarPaciente(this.idEditando(), this.paciForm.value).subscribe({
         next: () => {
-          alert('Usuario actualizado');
+          alert('Paciente actualizado');
           this.resetForm();
         }
       });
     } else {
-      this.usuarioService.registrar(this.userForm.value).subscribe({
+      this.pacienteService.registrar(this.paciForm.value).subscribe({
         next: () => {
-          alert('Usuario creado');
+          alert('Paciente creado');
           this.resetForm();
         }
       });
@@ -112,20 +109,13 @@ export class CreatePaciente implements OnInit {
   }
 
   resetForm() {
-    this.userForm.reset({ id_rol: 3 });
+    this.paciForm.reset();
 
     this.modoEdicion.set(false);
     this.idEditando.set(null);
 
     this.cerrarModal();
-    this.cargarUsuarios();
+    this.cargarPacientes();
   }
 
-  // 🔥 BONUS (rol bonito)
-  getRolNombre(id: number) {
-    if (id === 1) return 'Administrador';
-    if (id === 2) return 'Almacén';
-    if (id === 3) return 'Enfermería';
-    return 'Desconocido';
-  }
 }

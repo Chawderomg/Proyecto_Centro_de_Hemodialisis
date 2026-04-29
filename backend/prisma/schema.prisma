@@ -23,6 +23,7 @@ model lotes {
   fecha_vencimiento   DateTime  @db.Date
   fecha_ingreso       DateTime? @default(now()) @db.Timestamp(6)
   insumo              insumos   @relation(fields: [id_insumo], references: [id_insumo], onDelete: NoAction, onUpdate: NoAction, map: "fk_insumo")
+  salidas             salidas[]
 }
 
 model roles {
@@ -32,12 +33,33 @@ model roles {
 }
 
 model usuarios {
-  id_usuario      Int      @id @default(autoincrement())
-  ci              String   @unique @db.VarChar(20)
-  nombre_completo String   @db.VarChar(150)
-  password_hash   String   @db.VarChar(255)
-  es_activo       Boolean? @default(true)
+  id_usuario      Int       @id @default(autoincrement())
+  ci              String    @unique @db.VarChar(20)
+  nombre_completo String    @db.VarChar(150)
+  password_hash   String    @db.VarChar(255)
+  es_activo       Boolean?  @default(true)
   id_rol          Int
-  roles           roles    @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction, map: "fk_rol")
-  //creado_en       DateTime @default(now()) // 👈 AGREGA ESTO y luego npx prisma migrate dev
+  salidas         salidas[]
+  roles           roles     @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction, map: "fk_rol")
+}
+
+model pacientes {
+  id_paciente     Int       @id @default(autoincrement())
+  nombre_completo String    @db.VarChar(150)
+  ci              String?   @unique @db.VarChar(20)
+  es_activo       Boolean?  @default(true)
+  salidas         salidas[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model salidas {
+  id_salida    Int       @id @default(autoincrement())
+  id_lote      Int
+  id_usuario   Int
+  id_paciente  Int
+  cantidad     Int
+  fecha_salida DateTime? @default(now()) @db.Timestamp(6)
+  lotes        lotes     @relation(fields: [id_lote], references: [id_lote], onDelete: NoAction, onUpdate: NoAction, map: "fk_lote")
+  pacientes    pacientes @relation(fields: [id_paciente], references: [id_paciente], onDelete: NoAction, onUpdate: NoAction, map: "fk_paciente")
+  usuarios     usuarios  @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario")
 }

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js"; // IMPORTANTE: El .js es vital por tu tsconfig
 import insumoRoutes from "./routes/insumos.routes.js";
 import loteRoutes from "./routes/lotes.routes.js";
+import pacienteRoutes from "./routes/pacientes.routes.js"; // Reutilizamos las rutas de auth para pacientes, aunque idealmente podríamos tener un controlador específico
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use("/api/usuarios", authRoutes);
 app.use("/api/insumos", insumoRoutes);
 app.use("/api/lotes", loteRoutes);
+app.use("/api/pacientes", pacienteRoutes); // Reutilizamos las rutas de auth para pacientes, aunque idealmente podríamos tener un controlador específico
 
 
 
