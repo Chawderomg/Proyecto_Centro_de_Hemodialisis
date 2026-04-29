@@ -43,9 +43,9 @@ export class LoginUser {
               this.router.navigate(['/enfermeria']);
               break;
 
-            case 'Almacen':
-              console.log('Redirigiendo a panel de Almacén...');
-              this.router.navigate(['/almacen']);
+            case 'Medico':
+              console.log('Redirigiendo a panel de Medico...');
+              this.router.navigate(['/medico']);
               break;
 
             default:

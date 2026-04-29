@@ -38,6 +38,15 @@
         <span *ngIf="!isCollapsed">Registro de Insumos</span>
 
       </a>
+      <a routerLink="registrar-paciente" 
+         routerLinkActive="active-tab"
+         [routerLinkActiveOptions]="{ exact: true }" 
+         class="nav-tab">
+
+        <span class="tab-icon">🏥</span>
+        <span *ngIf="!isCollapsed">Gestión de Pacientes</span>
+
+      </a>
 
     </nav>
 
