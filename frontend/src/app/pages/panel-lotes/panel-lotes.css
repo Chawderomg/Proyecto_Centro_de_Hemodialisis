@@ -13,7 +13,7 @@
 }
 
 .header h1 {
-  margin: 0;
+  padding-bottom: 10px;
   color: #333;
   font-size: 28px;
 }
