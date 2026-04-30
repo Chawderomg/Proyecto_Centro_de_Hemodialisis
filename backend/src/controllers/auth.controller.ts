@@ -123,7 +123,7 @@ export const updateUsuario = async (req: Request, res: Response) => {
       ci,
       nombre_completo,
       password,
-      id_rol
+      id_rol:Number(id_rol),
     });
 
     res.status(200).json({
@@ -161,4 +161,3 @@ export const deleteUsuario = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
-

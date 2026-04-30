@@ -1,0 +1,102 @@
+<div class="navbar-actions">
+  <!-- 🔹 BOTÓN -->
+  <button class="btn-open" (click)="abrirModal()">
+    + Registrar Paciente
+  </button>
+
+  <!-- 🔹 BUSCADOR -->
+  <input 
+    type="text"
+    placeholder="🔍 Buscar paciente..."
+    [ngModel]="busqueda()"
+    (ngModelChange)="busqueda.set($event)"
+    class="input-search"
+  />
+</div>
+<!-- 🔹 TABLA -->
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>CI</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (paciente of pacientesFiltrados(); track paciente.id_paciente; let i = $index) {
+      <tr >
+        <td>{{ i + 1 }}</td>
+
+        <td>{{ paciente.nombre_completo }}</td>
+        <td>{{ paciente.ci }}</td>
+
+        <!-- 🔥 AQUÍ VA -->
+        <td class="acciones">
+          <button (click)="editarPaciente(paciente)">✏️</button>
+          <button (click)="eliminarPaciente(paciente.id_paciente)">🗑️</button>
+        </td>
+
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+
+
+<!-- 🔹 MODAL -->
+@if (mostrarModal()) {
+  <div class="modal-backdrop">
+
+    <!-- tarjeta flotante -->
+
+    <div class="modal-card">
+
+      <div class="card-header">
+        <h2>Registro de Pacientes </h2>
+        <p>Asigne los datos básicos del paciente</p>
+      </div>
+      
+      <form [formGroup]="paciForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group">
+          <label>Nombre Completo</label>
+          <input type="text" formControlName="nombre_completo" placeholder="Ej. Rocio Ancaci">
+          @if (paciForm.get('nombre_completo')?.invalid && paciForm.get('nombre_completo')?.touched) {
+            <small class="error-msg">El nombre es obligatorio (mín. 3 caracteres)</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>Cédula de Identidad (CI)</label>
+          <input type="text" formControlName="ci" placeholder="Ej. 1234567">
+          @if (paciForm.get('ci')?.invalid && paciForm.get('ci')?.touched) {
+            <small class="error-msg">Ingrese un CI válido (solo números)</small>
+          }
+        </div>
+
+        
+        @if (errorMessage()) {
+          <p class="error-text">{{ errorMessage() }}</p>
+        }
+
+        @if (successMessage()) {
+          <p class="success-text">{{ successMessage() }}</p>
+        }
+
+         <div class="modal-actions">
+            <button class="btn-register" type="submit">
+              {{ modoEdicion() ? 'Actualizar' : 'Guardar' }}
+            </button>
+            <button class="btn-register" type="button" (click)="cerrarModal()">Cancelar</button>
+          </div>  
+
+      </form>
+
+
+    </div>
+
+  </div>
+}

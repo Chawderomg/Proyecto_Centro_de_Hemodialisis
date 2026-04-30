@@ -25,7 +25,7 @@
          class="nav-tab">
 
         <span class="tab-icon">📋</span>
-        <span *ngIf="!isCollapsed">Panel de Lotes</span>
+        <span *ngIf="!isCollapsed">Entrada de insumos</span>
 
       </a>
 
@@ -36,6 +36,24 @@
 
         <span class="tab-icon">📦</span>
         <span *ngIf="!isCollapsed">Registro de Insumos</span>
+
+      </a>
+      <a routerLink="registrar-paciente" 
+         routerLinkActive="active-tab"
+         [routerLinkActiveOptions]="{ exact: true }" 
+         class="nav-tab">
+
+        <span class="tab-icon">🏥</span>
+        <span *ngIf="!isCollapsed">Gestión de Pacientes</span>
+
+      </a>
+      <a routerLink="registrar-salida" 
+         routerLinkActive="active-tab"
+         [routerLinkActiveOptions]="{ exact: true }"
+         class="nav-tab">
+
+        <span class="tab-icon">📋</span>
+        <span *ngIf="!isCollapsed">registrar salidas</span>
 
       </a>
 

@@ -22,8 +22,14 @@ export class AdminDashboard {
         this.titulo = 'Gestión de Usuarios';
       } else if (url.includes('registrar-cat')) {
         this.titulo = 'Registro de Insumos';
-      } else if (url.includes('panel-lotes')) {
+      } else if (url.includes('lotes')) {
         this.titulo = 'Gestión de Lotes';
+      } else if (url.includes('registrar-paciente')) {
+        this.titulo = 'Gestión de Pacientes';
+      } else if (url.includes('registrar-salida')) {
+        this.titulo = 'Gestión de Pacientes';
+
+        
       } else {
         this.titulo = 'Panel Administrativo';
       }
