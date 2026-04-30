@@ -47,6 +47,15 @@
         <span *ngIf="!isCollapsed">Gestión de Pacientes</span>
 
       </a>
+      <a routerLink="registrar-salida" 
+         routerLinkActive="active-tab"
+         [routerLinkActiveOptions]="{ exact: true }"
+         class="nav-tab">
+
+        <span class="tab-icon">📋</span>
+        <span *ngIf="!isCollapsed">registrar salidas</span>
+
+      </a>
 
     </nav>
 

@@ -1,0 +1,113 @@
+/* ===== CONTENEDOR ===== */
+.registro-container {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  max-width: 480px;
+  margin: 30px auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+/* TÍTULO */
+.registro-container h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* LABELS */
+.registro-container label {
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+/* INPUTS Y SELECT */
+.form-control {
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  border: 1.5px solid #cfd8dc;
+  background: #fafafa;
+  font-size: 14px;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+/* FOCUS */
+.form-control:focus {
+  outline: none;
+  border-color: #1976d2;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(25,118,210,0.12);
+}
+
+/* DISABLED */
+.form-control:disabled {
+  background: #eceff1;
+  cursor: not-allowed;
+}
+
+/* BOTÓN */
+.registro-container .btn-guardar {
+  width: 100%;
+  margin-top: 20px;
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* HOVER */
+.registro-container .btn-guardar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+/* DISABLED BOTÓN */
+.registro-container .btn-guardar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.border-danger {
+  border: 2px solid #dc3545 !important;
+  background-color: #fff8f8;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+  font-weight: bold;
+}
+
+/* Animación opcional para que el error parpadee un poco al aparecer */
+.small {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

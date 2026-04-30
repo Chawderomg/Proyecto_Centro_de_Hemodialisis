@@ -59,6 +59,7 @@ model salidas {
   id_paciente  Int
   cantidad     Int
   fecha_salida DateTime? @default(now()) @db.Timestamp(6)
+  //relaciones
   lotes        lotes     @relation(fields: [id_lote], references: [id_lote], onDelete: NoAction, onUpdate: NoAction, map: "fk_lote")
   pacientes    pacientes @relation(fields: [id_paciente], references: [id_paciente], onDelete: NoAction, onUpdate: NoAction, map: "fk_paciente")
   usuarios     usuarios  @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario")

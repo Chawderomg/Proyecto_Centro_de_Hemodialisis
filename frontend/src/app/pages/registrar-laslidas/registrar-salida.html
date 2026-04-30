@@ -1,0 +1,69 @@
+
+<div class="registro-container">
+  <h2>Nueva Salida de Insumo</h2>
+
+  <!-- Paciente -->
+  <label>Paciente:</label>
+  <select class="form-control" [(ngModel)]="nuevaSalida.id_paciente"  >
+    <option [ngValue]="null">-- Seleccionar Paciente --</option>
+    <option *ngFor="let p of pacientes" [value]="p.id_paciente">{{ p.nombre_completo }}</option>
+  </select>
+
+  <!-- Insumo -->
+  <label>Insumo:</label>
+<select 
+  class="form-control"
+  [(ngModel)]="nuevaSalida.id_insumo"
+  (ngModelChange)="onSeleccionarInsumo($event)"
+>
+  <option [ngValue]="null">-- Seleccionar Insumo --</option>
+  <option *ngFor="let i of insumos" [ngValue]="i.id_insumo">
+    {{ i.nombre }}
+  </option>
+</select>
+
+
+  <!-- Lote -->
+  <label >Lote Disponible:</label>
+    <select class="form-control" 
+            [(ngModel)]="nuevaSalida.id_lote" 
+            (change)="onSeleccionarLote(nuevaSalida.id_lote)"
+            [disabled]="lotesFiltrados.length === 0">
+      <option [ngValue]="null">-- Seleccionar Lote --</option>
+      <option *ngFor="let l of lotesFiltrados" [value]="l.id_lote">
+        {{ l.numero_lote }} (Disponible: {{ l.cantidad_disponible }})
+      </option>
+      <small *ngIf="lotesFiltrados.length === 0" class="text-muted d-block mt-1">
+      Seleccione un insumo para ver lotes con stock.
+    </small>
+    </select>
+
+    <label class="form-label font-weight-bold">Cantidad a extraer:</label>
+    <input 
+      type="number" 
+      class="form-control" 
+      [(ngModel)]="nuevaSalida.cantidad"
+      (input)="validarCantidad()"
+      [class.border-danger]="errorStock"
+      [class.text-danger]="errorStock"
+      [disabled]="!nuevaSalida.id_lote"
+      placeholder="Máximo disponible: {{ stockMaximo }}">
+    
+    <!-- Mensajes de Error -->
+    <div *ngIf="errorStock && nuevaSalida.cantidad > 0" class="text-danger small mt-1 animate-fade">
+      ⚠️ No puedes sacar más de <strong>{{ stockMaximo }}</strong> unidades.
+    </div>
+    <div *ngIf="nuevaSalida.cantidad <= 0 && nuevaSalida.cantidad !== null" class="text-warning small mt-1">
+      La cantidad debe ser mayor a 0.
+    </div>
+
+
+  
+
+    <button 
+    class="btn btn-guardar" 
+    (click)="guardar()" 
+    [disabled]="errorStock || !nuevaSalida.id_lote || nuevaSalida.cantidad <= 0">
+    Confirmar Salida
+    </button>
+</div>

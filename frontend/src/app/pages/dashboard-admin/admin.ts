@@ -26,6 +26,10 @@ export class AdminDashboard {
         this.titulo = 'Gestión de Lotes';
       } else if (url.includes('registrar-paciente')) {
         this.titulo = 'Gestión de Pacientes';
+      } else if (url.includes('registrar-salida')) {
+        this.titulo = 'Gestión de Pacientes';
+
+        
       } else {
         this.titulo = 'Panel Administrativo';
       }
