@@ -6,7 +6,7 @@ import { CreateUser } from './pages/create-user/create-user';
 import { RegistrarCat } from './pages/register-cat/register-cat';
 import { PanelLotesComponent } from './pages/panel-lotes/panel-lotes';
 import { CreatePaciente } from './pages/registrar-pacientes/registrar-paci';
-import { RegistrarSalida } from './pages/registrar-laslidas/registrar-salida';
+import { RegistrarSalida } from './pages/registrar-salidas/registrar-salida';
 
 export const routes: Routes = [
   { path: '', component: Inicio },

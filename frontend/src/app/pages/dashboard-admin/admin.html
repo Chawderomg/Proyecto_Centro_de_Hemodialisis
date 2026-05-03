@@ -2,71 +2,92 @@
 
   <aside class="admin-sidebar" [class.collapsed]="isCollapsed">
 
+    <!-- HEADER -->
     <div class="sidebar-header">
-      <button (click)="toggleSidebar()">☰</button>
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
       <span *ngIf="!isCollapsed">Panel Administrativo</span>
     </div>
 
+    <!-- NAV -->
     <nav class="admin-nav">
 
       <a routerLink="registrar-usuario" 
-         routerLinkActive="active-tab" 
-         [routerLinkActiveOptions]="{ exact: true }"
+         routerLinkActive="active-tab"
          class="nav-tab">
 
-        <span class="tab-icon">👤</span>
-        <span *ngIf="!isCollapsed">Registrar Usuario</span>
+        <svg viewBox="0 0 24 24">
+          <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/>
+        </svg>
 
+        <span *ngIf="!isCollapsed">Registrar Usuario</span>
       </a>
 
       <a routerLink="lotes" 
          routerLinkActive="active-tab"
-         [routerLinkActiveOptions]="{ exact: true }"
          class="nav-tab">
 
-        <span class="tab-icon">📋</span>
-        <span *ngIf="!isCollapsed">Entrada de insumos</span>
+        <svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
 
+        <span *ngIf="!isCollapsed">Entrada de Insumos</span>
       </a>
 
       <a routerLink="registrar-cat" 
          routerLinkActive="active-tab"
-         [routerLinkActiveOptions]="{ exact: true }" 
          class="nav-tab">
 
-        <span class="tab-icon">📦</span>
-        <span *ngIf="!isCollapsed">Registro de Insumos</span>
+        <svg viewBox="0 0 24 24">
+          <path d="M3 7l9-4 9 4-9 4-9-4zm0 5l9 4 9-4M3 17l9 4 9-4"/>
+        </svg>
 
+        <span *ngIf="!isCollapsed">Registro de Insumos</span>
       </a>
+
       <a routerLink="registrar-paciente" 
          routerLinkActive="active-tab"
-         [routerLinkActiveOptions]="{ exact: true }" 
          class="nav-tab">
 
-        <span class="tab-icon">🏥</span>
-        <span *ngIf="!isCollapsed">Gestión de Pacientes</span>
+        <svg viewBox="0 0 24 24">
+          <path d="M3 21V7l9-4 9 4v14M9 21v-6h6v6"/>
+        </svg>
 
+        <span *ngIf="!isCollapsed">Gestión de Pacientes</span>
       </a>
+
       <a routerLink="registrar-salida" 
          routerLinkActive="active-tab"
-         [routerLinkActiveOptions]="{ exact: true }"
          class="nav-tab">
 
-        <span class="tab-icon">📋</span>
-        <span *ngIf="!isCollapsed">registrar salidas</span>
+        <svg viewBox="0 0 24 24">
+          <path d="M10 17l5-5-5-5M15 12H3"/>
+        </svg>
 
+        <span *ngIf="!isCollapsed">Registrar Salidas</span>
       </a>
 
     </nav>
 
+    <!-- FOOTER -->
     <div class="sidebar-footer">
       <a routerLink="/" class="btn-logout">
-        <span>🚪</span>
+
+        <svg viewBox="0 0 24 24">
+          <path d="M16 17l5-5-5-5M21 12H9M9 3H5v18h4"/>
+        </svg>
+
         <span *ngIf="!isCollapsed">Cerrar Sesión</span>
       </a>
     </div>
+
   </aside>
 
+  <!-- CONTENT -->
   <main class="admin-content">
 
     <header class="content-header">
@@ -77,10 +98,6 @@
       <router-outlet></router-outlet>
     </section>
 
-    
-
   </main>
-    <!-- MODAL -->
-
 
 </div>

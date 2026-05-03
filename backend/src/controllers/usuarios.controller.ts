@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { Role } from "../constants/roles.enum.js"; 
 
 import { UsuarioService } from "../service/usuario.service.js";
+
 const usuarioService = new UsuarioService();
 export const registerUser = async (req: Request, res: Response) => {
   try {

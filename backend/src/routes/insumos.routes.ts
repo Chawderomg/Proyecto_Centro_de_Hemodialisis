@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createInsumo,getInsumos, getStockTotal,getInsumosDashboard ,getAlertasVencimiento,getBajoStock,updateInsumo,deleteInsumo} from "../controllers/insumos.controller.js";
+import { createInsumo,getInsumos,getDashboard,getStockTotal,getBajoStock,updateInsumo,deleteInsumo} from "../controllers/insumos.controller.js";
 
 const router = Router();
 
@@ -8,10 +8,12 @@ const router = Router();
 router.post("/", createInsumo);
 // rutas del sprin 2
 router.get('/getinsumos', getInsumos);
-router.get("/dashboard",getInsumosDashboard); // La más completa para Rodrigo
+//router.get("/dashboard",getInsumosDashboard); // La más completa para Rodrigo
 router.get("/stock-total", getStockTotal);      // Solo stock sumado
-router.get("/vencimientos", getAlertasVencimiento); // Solo lo que va a caducar
+//router.get("/vencimientos", getAlertasVencimiento); // Solo lo que va a caducar
 router.get("/bajo-stock", getBajoStock);        // Solo alertas de cantidad
+router.get("/dashboard",getDashboard); // La más completa para Rodrigo
+
 
 // probando crud de editar y eleiminar;
 // 🔥 NUEVAS

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { InsumoService } from '../../services/insumo.service';
+import { LoteService } from '../../services/lote.service';
 
 @Component({
   selector: 'app-panel-lotes',
@@ -32,6 +33,7 @@ export class PanelLotesComponent implements OnInit {
 
   constructor(
     private insumoService: InsumoService,
+    private loteService: LoteService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -45,7 +47,7 @@ export class PanelLotesComponent implements OnInit {
       // Cargamos todas las peticiones en paralelo para mayor velocidad
       const [resInsumos, resVenc, resStock] = await Promise.all([
         firstValueFrom(this.insumoService.getInsumosDashboard()),
-        firstValueFrom(this.insumoService.getAlertasVencimiento()),
+        firstValueFrom(this.loteService.getVencimientos()),
         firstValueFrom(this.insumoService.getBajoStock())
       ]);
 
@@ -73,9 +75,10 @@ export class PanelLotesComponent implements OnInit {
   async guardarLote() {
     if (this.loteForm.valid) {
       try {
-        const response = await firstValueFrom(this.insumoService.crearLote(this.loteForm.value));
+        const response = await firstValueFrom(this.loteService.createLote(this.loteForm.value));
         if (response.success) {
-          alert(response.message);
+          const mensaje = response.data?.mensaje || 'Lote creado correctamente';
+          alert(mensaje);
           this.cerrarModal();
           this.cargarDatos(); // Refrescamos todo el dashboard
         }
@@ -84,7 +87,7 @@ export class PanelLotesComponent implements OnInit {
         alert(e.error?.message || "Error al conectar con el servidor");
       }
     }
-  }
+  } 
 
   // Getters para cálculos rápidos en el HTML
   get totalStock(): number {
