@@ -1,0 +1,304 @@
+/* ===== CONTENEDOR ===== */
+.registro-container {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  max-width: 480px;
+  margin: 30px auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+/* TÍTULO */
+.registro-container h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* LABELS */
+.registro-container label {
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+
+/* INPUTS Y SELECT */
+.form-control {
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  border: 1.5px solid #cfd8dc;
+  background: #fafafa;
+  font-size: 14px;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+/* FOCUS */
+.form-control:focus {
+  outline: none;
+  border-color: #1976d2;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(25,118,210,0.12);
+}
+
+
+/* DISABLED */
+.form-control:disabled {
+  background: #eceff1;
+  cursor: not-allowed;
+}
+
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 11px;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fafafa;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #1976d2;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(25,118,210,0.12);
+}
+
+
+/* BOTÓN */
+ .btn-guardar {
+  width: 100%;
+  margin-top: 20px;
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* HOVER */
+.btn-guardar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+/* DISABLED BOTÓN */
+.btn-guardar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.border-danger {
+  border: 2px solid #dc3545 !important;
+  background-color: #fff8f8;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+  font-weight: bold;
+}
+
+/* Animación opcional para que el error parpadee un poco al aparecer */
+.small {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.tex{
+  background-color: #f5f102;
+}
+
+
+/*TABLA DE SALIDAS*/
+.tabla-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f3f4f6;
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+.lote-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.cantidad {
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}
+
+/*FILTOS DE BUSQUEDA*/
+.filtros {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filtros input,
+.filtros select {
+  
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.filtros input:focus,
+.filtros select:focus {
+  outline: none;
+  border-color: #1976d2;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(25,118,210,0.12);
+}
+
+
+.contador {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* 🎯 colores */
+.alto {
+  color: green;
+  font-weight: bold;
+}
+
+.medio {
+  color: orange;
+  font-weight: bold;
+}
+
+.bajo {
+  color: red;
+  font-weight: bold;
+}
+
+/* badge lote */
+.lote-badge {
+  background: #e3f2fd;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+
+/* 🔥 fondo oscuro */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* 🔥 tarjeta */
+.modal-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+/* yo */
+.modal-header h2 {
+  font-size: 18px;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* botón */
+.btn-open {
+  background: #1976d2;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  /*margin-bottom: 15px;*/
+  cursor: pointer;
+}

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { signal, computed, OnInit } from '@angular/core';
+import { Component,signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, FormsModule, Validators } from '@angular/forms'; 
 import { UsuarioService } from '../../services/usuario.service';

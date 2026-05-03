@@ -1,0 +1,160 @@
+
+<div class="tabla-container">
+
+  <h2>Historial de Salidas</h2>
+
+  <!-- 🔍 FILTROS -->
+  
+  <div class="filtros">
+
+    <button class="btn-open" (click)="abrirModal()">
+      + Nueva Salida
+    </button>
+
+    <input 
+      type="text"
+      placeholder="Buscar insumo o lote..."
+      [(ngModel)]="busqueda"
+      class="input-search"
+    />
+
+    <select [(ngModel)]="filtroPaciente">
+      <option value="">Todos los pacientes</option>
+      <option *ngFor="let p of pacientes" [value]="p.nombre_completo">
+        {{ p.nombre_completo }}
+      </option>
+    </select>
+
+    <input type="date" [(ngModel)]="filtroFecha" />
+  </div>
+
+  <!-- 🔢 CONTADOR -->
+  <div class="contador">
+    Total: {{ historialFiltrado.length }}
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="cargando">Cargando...</div>
+
+  <!-- TABLA -->
+  <table *ngIf="!cargando && historialFiltrado.length > 0">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Fecha</th>
+        <th>Paciente</th>
+        <th>Enfermera</th>
+        <th>Insumo</th>
+        <th>Lote</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of historialFiltrado; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.fecha_salida | date:'short' }}</td>
+        <td>{{ item.paciente }}</td>
+        <td>{{ item.enfermera }}</td>
+        <td>{{ item.insumo }}</td>
+        <td>
+          <span class="lote-badge">
+            {{ item.lote }}
+          </span>
+        </td>
+        <td>
+          <span 
+            [class.alto]="item.cantidad > 500"
+            [class.medio]="item.cantidad <= 500 && item.cantidad > 50"
+            [class.bajo]="item.cantidad <= 50">
+            {{ item.cantidad }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!cargando && historialFiltrado.length === 0">
+    Sin resultados
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div *ngIf="mostrarModal" class="modal-backdrop" (click)="cerrarModal()">
+
+  <div class="modal-card" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2>Nueva Salida de Insumo</h2>
+      <button class="btn-cerrar" (click)="cerrarModal()">&times;</button>
+    </div>
+
+      <!-- Paciente -->
+      <label>Paciente:</label>
+      <select class="form-control" [(ngModel)]="nuevaSalida.id_paciente">
+        <option [ngValue]="null">-- Seleccionar Paciente --</option>
+        <option *ngFor="let p of pacientes" [value]="p.id_paciente">
+          {{ p.nombre_completo }}
+        </option>
+      </select>
+
+      <!-- Insumo -->
+      <label>Insumo:</label>
+      <select 
+        class="form-control"
+        [(ngModel)]="nuevaSalida.id_insumo"
+        (ngModelChange)="onSeleccionarInsumo($event)">
+        <option [ngValue]="null">-- Seleccionar Insumo --</option>
+        <option *ngFor="let i of insumos" [ngValue]="i.id_insumo">
+          {{ i.nombre }}
+        </option>
+      </select>
+
+      <!-- Lote -->
+      <label>Lote Disponible:</label>
+      <select 
+        class="form-control" 
+        [(ngModel)]="nuevaSalida.id_lote" 
+        (change)="onSeleccionarLote(nuevaSalida.id_lote)"
+        [disabled]="lotesFiltrados.length === 0">
+        <option [ngValue]="null">-- Seleccionar Lote --</option>
+        <option *ngFor="let l of lotesFiltrados" [value]="l.id_lote">
+          {{ l.numero_lote }} (Disponible: {{ l.cantidad_disponible }})
+        </option>
+      </select>
+
+      <small *ngIf="lotesFiltrados.length === 0 && nuevaSalida.id_insumo" class="tex">
+        No hay lotes vigentes con stock para este insumo.
+      </small>
+
+      <!-- Cantidad -->
+      <label class="form-label font-weight-bold">Cantidad a extraer:</label>
+      <input 
+        type="number" 
+        class="form-control" 
+        [(ngModel)]="nuevaSalida.cantidad"
+        (input)="validarCantidad()"
+        [class.border-danger]="errorStock"
+        [class.text-danger]="errorStock"
+        [disabled]="!nuevaSalida.id_lote"
+        placeholder="Máximo disponible: {{ stockMaximo }}">
+
+      <!-- Mensajes de Error -->
+      <div *ngIf="errorStock && nuevaSalida.cantidad > 0" class="text-danger">
+        ⚠️ No puedes sacar más de <strong>{{ stockMaximo }}</strong> unidades.
+      </div>
+      <div *ngIf="nuevaSalida.cantidad <= 0 && nuevaSalida.cantidad !== null" class="text-warning">
+        La cantidad debe ser mayor a 0.
+      </div>
+
+      <button 
+        class="btn btn-guardar" 
+        (click)="guardar();cerrarModal()"
+        [disabled]="errorStock || !nuevaSalida.id_lote || nuevaSalida.cantidad <= 0">
+        Confirmar Salida
+      </button>
+
+    
+
+  </div>
+</div>

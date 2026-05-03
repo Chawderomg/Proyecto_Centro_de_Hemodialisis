@@ -5,6 +5,7 @@ import authRoutes from "./routes/auth.routes.js"; // IMPORTANTE: El .js es vital
 import insumoRoutes from "./routes/insumos.routes.js";
 import loteRoutes from "./routes/lotes.routes.js";
 import pacienteRoutes from "./routes/pacientes.routes.js"; // Reutilizamos las rutas de auth para pacientes, aunque idealmente podríamos tener un controlador específico
+import salidaRoutes from "./routes/salida.routes.js";
 
 dotenv.config();
 
@@ -24,6 +25,8 @@ app.use("/api/insumos", insumoRoutes);
 app.use("/api/lotes", loteRoutes);
 app.use("/api/pacientes", pacienteRoutes); // Reutilizamos las rutas de auth para pacientes, aunque idealmente podríamos tener un controlador específico
 
+// ...
+app.use("/api/salidas", salidaRoutes);
 
 
 app.get("/", (req, res) => {

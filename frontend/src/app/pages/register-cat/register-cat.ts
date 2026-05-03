@@ -10,7 +10,7 @@ import { InsumoService } from '../../services/insumo.service';
   standalone: true,
   imports: [CommonModule, FormsModule,],
   templateUrl: './register-cat.html',
-  styleUrls: ['./register-cat.css']
+  styleUrl: './register-cat.css',
 })
 export class RegistrarCat implements OnInit {
 
