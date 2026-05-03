@@ -1,35 +1,61 @@
 <header class="navbar">
   <div class="nav-container">
+
+    <!-- LOGO -->
     <div class="nav-brand" routerLink="/">
-        <img src="logo2.png" alt="Centro de Hemodiálisis" class="nav-logo">
+      <img src="logo2.png" alt="Centro de Hemodiálisis" class="nav-logo">
     </div>
 
+    <!-- MENÚ -->
     <nav class="nav-menu">
+
       <a routerLink="/" 
          routerLinkActive="active" 
          [routerLinkActiveOptions]="{exact: true}" 
-         class="nav-link">Inicio</a>
-         
-      <a routerLink="/login" class="nav-btn-primary">Iniciar Sesión</a>
-      
+         class="nav-link">
+         Inicio
+      </a>
+
+      <!-- 🔔 NOTIFICACIONES -->
+      <div class="notification-wrapper">
+
+        <button class="notification-btn">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2v1h16v-1l-2-2z"/>
+            <path d="M9 21a3 3 0 0 0 6 0"/>
+          </svg>
+
+          <span class="notification-badge">3</span>
+        </button>
+
+      </div>
+
+      <!-- LOGIN -->
+      <a routerLink="/login" class="nav-btn-primary">
+        Iniciar Sesión
+      </a>
+
+      <!-- PERFIL -->
       <div class="user-profile">
         <div class="avatar-empty"></div>
       </div>
+
     </nav>
   </div>
 </header>
 
+
+<!-- CONTENIDO -->
 <main class="content-area">
   <router-outlet></router-outlet>
 </main>
 
 
-
-
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-container">
 
-    <!-- Información de la empresa -->
+    <!-- INFO -->
     <div class="footer-section">
       <h3>Centro de Hemodiálisis</h3>
       <p>
@@ -38,7 +64,7 @@
       </p>
     </div>
 
-    <!-- Enlaces rápidos -->
+    <!-- LINKS -->
     <div class="footer-section">
       <h4>Enlaces</h4>
       <ul>
@@ -47,17 +73,37 @@
       </ul>
     </div>
 
-    <!-- Contacto -->
+    <!-- CONTACTO -->
     <div class="footer-section">
       <h4>Contacto</h4>
-      <p>📍 Cochabamba, Bolivia</p>
-      <p>📞 +591 70000000</p>
-      <p>✉️ contacto@hemodialisis.com</p>
+
+      <p class="footer-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        Cochabamba, Bolivia
+      </p>
+
+      <p class="footer-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 2h4l2 5-3 2c1.5 3 3.5 5 6 6l2-3 5 2v4c0 1-1 2-2 2C10 20 4 14 4 6c0-1 1-2 2-2z"/>
+        </svg>
+        +591 70000000
+      </p>
+
+      <p class="footer-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h16v16H4z"/>
+          <path d="M22 6l-10 7L2 6"/>
+        </svg>
+        contacto@hemodialisis.com
+      </p>
+
     </div>
 
   </div>
 
-  <!-- Parte inferior -->
   <div class="footer-bottom">
     <p>© 2026 Centro de Hemodiálisis | Todos los derechos reservados</p>
   </div>
