@@ -4,11 +4,11 @@ import { ReactiveFormsModule, FormGroup, FormControl, FormsModule, Validators } 
 import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
-  selector: 'app-create-user',
+  selector: 'app-registrar-usuario',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule,FormsModule],
-  templateUrl: './create-user.html',
-  styleUrl: './create-user.css',
+  templateUrl: './registrar-usuario.html',
+  styleUrl: './registrar-usuario.css',
 })
 
   

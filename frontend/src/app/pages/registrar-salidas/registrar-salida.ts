@@ -30,7 +30,7 @@ export class RegistrarSalida implements OnInit {
   // Objeto que se enviará al backend
   nuevaSalida = {
   id_paciente: null,
-  id_insumo: null, // 🔥 IMPORTANTE
+  id_insumo: null, 
   id_lote: null,
   id_usuario: 1,
   cantidad: 0
@@ -117,7 +117,9 @@ export class RegistrarSalida implements OnInit {
       },
       error: (err) => alert("Error: " + err.error.message)
     });
+    
   }
+
    resetForm() {
   this.nuevaSalida = {
     id_paciente: null,

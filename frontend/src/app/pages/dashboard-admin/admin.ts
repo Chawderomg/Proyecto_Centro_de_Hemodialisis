@@ -20,7 +20,7 @@ export class AdminDashboard {
 
       if (url.includes('registrar-usuario')) {
         this.titulo = 'Gestión de Usuarios';
-      } else if (url.includes('registrar-cat')) {
+      } else if (url.includes('registrar-insumos')) {
         this.titulo = 'Registro de Insumos';
       } else if (url.includes('lotes')) {
         this.titulo = 'Gestión de Lotes';

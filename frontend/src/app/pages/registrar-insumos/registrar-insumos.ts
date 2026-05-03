@@ -6,11 +6,11 @@ import { InsumoService } from '../../services/insumo.service';
 
 
 @Component({
-  selector: 'app-register-cat',
+  selector: 'app-registrar-insumos',
   standalone: true,
   imports: [CommonModule, FormsModule,],
-  templateUrl: './register-cat.html',
-  styleUrl: './register-cat.css',
+  templateUrl: './registrar-insumos.html',
+  styleUrl: './registrar-insumos.css',
 })
 export class RegistrarCat implements OnInit {
 

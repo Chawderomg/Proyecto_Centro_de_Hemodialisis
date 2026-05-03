@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { SalidaService } from "../service/salida.service.js";
 
+
 const salidaService = new SalidaService();
 
 export const registrarNuevaSalida = async (req: Request, res: Response) => {
