@@ -92,8 +92,6 @@ resetFormulario() {
   this.cerrarModal();
 }
 
- 
-
   insumosFiltrados = computed(() => {
   const texto = this.busqueda().toLowerCase();
 
@@ -114,6 +112,7 @@ resetFormulario() {
 
   this.abrirModal();
   }
+
 eliminarInsumo(id: number) {
   if (!confirm('¿Eliminar insumo?')) return;
 

@@ -1,263 +1,230 @@
 /* ============================= */
-/* LAYOUT GENERAL DEL ADMIN */
+/* RESET */
 /* ============================= */
-
-.admin-layout {
-  display: flex;
-
-  /* Altura total menos el header principal */
-  min-height: calc(100vh - 80px);
-
-  /* Color de fondo general */
-  background-color: #f4f7f6;
-
-  /* Crea contexto base de capas */
-  position: relative;
-  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* ============================= */
+/* LAYOUT GENERAL */
+/* ============================= */
+.admin-layout {
+  display: flex;
+  min-height: calc(100vh - 80px);
+  background-color: #f4f7f6;
+}
 
 /* ============================= */
-/* SIDEBAR (MENÚ IZQUIERDO) */
+/* SIDEBAR */
 /* ============================= */
-
 .admin-sidebar {
-
-  /* Ancho fijo del menú */
   width: 280px;
-
-  /* Color del menú */
   background-color: #ffffff;
-
-  /* Línea separadora */
   border-right: 1px solid #cfd8dc;
-
-  /* Organización vertical */
   display: flex;
   flex-direction: column;
-
+  overflow-x: hidden;
   padding: 1.5rem 0;
 
-  /* 🔥 MUY IMPORTANTE */
-  /* Evita que el contenido tape el menú */
-  position: relative;
-  z-index: 1;
 }
 
 .admin-sidebar.collapsed {
+
   width: 70px;
 }
-/* ============================= */
-/* ENCABEZADO DEL SIDEBAR */
-/* ============================= */
 
+
+
+/* ============================= */
+/* HEADER */
+/* ============================= */
 .sidebar-header {
-
   padding: 0 1.5rem 1.5rem;
-
   border-bottom: 1px solid #eceff1;
-
   color: #37474f;
-
   font-weight: 600;
-
   display: flex;
-
   align-items: center;
-
   gap: 10px;
+  flex-shrink: 0;
 }
 
-
-/* ============================= */
-/* NAVEGACIÓN DEL MENÚ */
-/* ============================= */
-
-.admin-nav {
-
-  /* Hace que los tabs ocupen el espacio central */
-  flex: 1;
-
-  padding: 1rem 0;
+/* TEXTO HEADER ANIMADO */
+.sidebar-header span {
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+.admin-sidebar.collapsed .sidebar-header span {
+  opacity: 0;
+  transform: translateX(-10px);
+}
 
-/* ============================= */
-/* CADA TAB DEL MENÚ */
-/* ============================= */
-
-.nav-tab {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 12px 1.5rem;
-
-  text-decoration: none;
-
-  color: #607d8b;
-
-  font-weight: 500;
-
-  transition: all 0.3s ease;
-
+/* BOTÓN */
+.toggle-btn {
+  background: none;
+  border: none;
   cursor: pointer;
 }
 
+.toggle-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: #546e7a;
+  stroke-width: 2;
+  fill: none;
+}
 
 /* ============================= */
-/* HOVER SOBRE TAB */
+/* NAV */
 /* ============================= */
+.admin-nav {
+  flex: 1;
+  padding: 1rem 0;
+}
 
-.nav-tab:hover:not(.disabled) {
+/* TAB */
+.nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 1.5rem;
+  text-decoration: none;
+  color: #607d8b;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  border-radius: 8px;
+  margin: 4px 10px;
+}
 
+/* TEXTO ANIMADO */
+.nav-tab span {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+/* ICONOS */
+.nav-tab svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* HOVER */
+.nav-tab:hover {
   background-color: #f1f5f7;
-
   color: #546e7a;
 }
 
-
-/* ============================= */
-/* TAB ACTIVO */
-/* ============================= */
-
+/* ACTIVO */
 .active-tab {
-
   background-color: #eceff1;
-
   color: #37474f;
-
-  /* Línea indicadora derecha */
-  border-right: 4px solid #546e7a;
-
+  border-left: 4px solid #546e7a;
   font-weight: 600;
 }
 
-
 /* ============================= */
-/* TAB DESHABILITADO */
+/* FOOTER */
 /* ============================= */
-
-.disabled {
-
-  opacity: 0.5;
-
-  cursor: not-allowed;
-
-  pointer-events: none;
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid #eceff1;
 }
 
-
-/* ============================= */
-/* CONTENIDO PRINCIPAL */
-/* ============================= */
-
-.admin-content {
-
-  flex: 1;
-
-  padding: 2rem;
-
-  /* Scroll vertical si hay mucho contenido */
-  overflow-y: auto;
-
-  /* 🔥 IMPORTANTE */
-  /* Mantiene el contenido debajo del sidebar */
-  position: relative;
-
-  z-index: 1;
-}
-
-
-/* ============================= */
-/* HEADER DEL CONTENIDO */
-/* ============================= */
-
-.content-header {
-
-  margin-bottom: 2rem;
-
-  border-bottom: 2px solid #cfd8dc;
-
-  padding-bottom: 1rem;
-}
-
-
-.content-header h2 {
-
-  color: #37474f;
-
-  margin: 0;
-
-  font-size: 1.8rem;
-}
-
-
-/* ============================= */
-/* CONTENEDOR DE LAS VISTAS */
-/* (Aquí carga router-outlet) */
-/* ============================= */
-
-.view-container {
-
-  background: white;
-
-  border-radius: 12px;
-
-  box-shadow: 0 4px 6px rgba(0,0,0,0.04);
-
-  padding: 2rem;
-
-  /* 🔥 Evita que tape el sidebar */
-  position: relative;
-
-  z-index: 1;
-}
-
-
-/* ============================= */
-/* BOTÓN CERRAR SESIÓN */
-/* ============================= */
-
+/* LOGOUT */
 .btn-logout {
-
-  margin: 0 1.5rem;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 1rem;
   padding: 10px;
-
-  text-align: center;
-
   background-color: #fbe9e7;
-
   color: #d84315;
-
   border-radius: 6px;
-
   text-decoration: none;
-
   font-weight: 600;
-
-  font-size: 0.9rem;
-
   transition: all 0.3s ease;
 }
 
+/* TEXTO LOGOUT */
+.btn-logout span {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-logout svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
 
 .btn-logout:hover {
-
   background-color: #ffccbc;
 }
 
-
 /* ============================= */
-/* ICONOS DE TAB */
+/* CONTENIDO */
 /* ============================= */
-
-.tab-icon {
-
-  font-size: 1.2rem;
+.admin-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
 }
 
+/* HEADER */
+.content-header {
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #cfd8dc;
+  padding-bottom: 1rem;
+}
+
+.content-header h2 {
+  color: #37474f;
+  font-size: 1.8rem;
+}
+
+/* VIEW */
+.view-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+  padding: 2rem;
+}
+
+/* ============================= */
+/* COLLAPSED (SIN SALTOS) */
+/* ============================= */
+
+/* Centrar iconos */
+.admin-sidebar.collapsed .nav-tab {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+/* Ocultar texto SUAVEMENTE */
+.admin-sidebar.collapsed .nav-tab span {
+  opacity: 0;
+  transform: translateX(-10px);
+  pointer-events: none;
+}
+
+/* Header centrado */
+.admin-sidebar.collapsed .sidebar-header {
+  justify-content: center;
+}
+
+/* Logout centrado */
+.admin-sidebar.collapsed .btn-logout {
+  justify-content: center;
+}
+
+/* Ocultar texto logout */
+.admin-sidebar.collapsed .btn-logout span {
+  opacity: 0;
+  transform: translateX(-10px);
+}

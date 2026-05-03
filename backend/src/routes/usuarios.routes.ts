@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { registerUser ,loginUser,getUsuarios,updateUsuario,deleteUsuario} from "../controllers/auth.controller.js"; // .js obligatorio
-
+import { registerUser ,loginUser,getUsuarios,updateUsuario,deleteUsuario} from "../controllers/usuarios.controller.js"; // .js obligatorio
 const router = Router();
 
 // Endpoint: POST http://localhost:3000/api/auth/register
