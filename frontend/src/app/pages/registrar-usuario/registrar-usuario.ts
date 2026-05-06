@@ -45,7 +45,13 @@ export class CreateUser implements OnInit {
       }
     });
   }
-
+  // 🔥 BONUS (rol bonito)
+  getRolNombre(id: number) {
+    if (id === 1) return 'Administrador';
+    if (id === 2) return 'Almacén';
+    if (id === 3) return 'Enfermería';
+    return 'Desconocido';
+  }
   // 🔍 FILTRO
  usuariosFiltrados = computed(() => {
   const texto = this.busqueda().toLowerCase();
@@ -76,7 +82,7 @@ export class CreateUser implements OnInit {
     this.userForm.patchValue({
       nombre_completo: usuario.nombre_completo,
       ci: usuario.ci,
-      id_rol: usuario.id_rol
+      id_rol: usuario.rol
     });
 
     this.abrirModal();
@@ -120,11 +126,5 @@ export class CreateUser implements OnInit {
     this.cargarUsuarios();
   }
 
-  // 🔥 BONUS (rol bonito)
-  getRolNombre(id: number) {
-    if (id === 1) return 'Administrador';
-    if (id === 2) return 'Almacén';
-    if (id === 3) return 'Enfermería';
-    return 'Desconocido';
-  }
+  
 }

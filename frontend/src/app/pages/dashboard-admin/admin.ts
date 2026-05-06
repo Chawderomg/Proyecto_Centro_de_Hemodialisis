@@ -27,7 +27,7 @@ export class AdminDashboard {
       } else if (url.includes('registrar-paciente')) {
         this.titulo = 'Gestión de Pacientes';
       } else if (url.includes('registrar-salida')) {
-        this.titulo = 'Gestión de Pacientes';
+        this.titulo = 'Gestión de Salida';
 
         
       } else {

@@ -120,21 +120,6 @@ export class RegistrarSalida implements OnInit {
     
   }
 
-   resetForm() {
-  this.nuevaSalida = {
-    id_paciente: null,
-    id_insumo: null,
-    id_lote: null,
-    id_usuario: 1,
-    cantidad: 0
-  };
-
-  this.lotesFiltrados = [];
-  this.stockMaximo = 0;
-  this.errorStock = false;
-  this.cdr.detectChanges(); // Forzamos a que la interfaz se limpie visualmente
-}
-
   cargarHistorial() {
     this.salidaService.getHistorial().subscribe({
       next: (res: any) => {
@@ -184,6 +169,22 @@ abrirModal() {
 
 cerrarModal() {
   this.mostrarModal = false;
+  this.resetForm()
+}
+
+   resetForm() {
+  this.nuevaSalida = {
+    id_paciente: null,
+    id_insumo: null,
+    id_lote: null,
+    id_usuario: 1,
+    cantidad: 0
+  };
+
+  this.lotesFiltrados = [];
+  this.stockMaximo = 0;
+  this.errorStock = false;
+  this.cdr.detectChanges(); // Forzamos a que la interfaz se limpie visualmente
 }
 
 }

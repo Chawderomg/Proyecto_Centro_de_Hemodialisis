@@ -1,13 +1,11 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import authRoutes from "./routes/usuarios.routes.js"; // IMPORTANTE: El .js es vital por tu tsconfig
 import insumoRoutes from "./routes/insumos.routes.js";
 import loteRoutes from "./routes/lotes.routes.js";
 import pacienteRoutes from "./routes/pacientes.routes.js"; // Reutilizamos las rutas de auth para pacientes, aunque idealmente podríamos tener un controlador específico
 import salidaRoutes from "./routes/salida.routes.js";
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;

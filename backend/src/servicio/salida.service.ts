@@ -1,4 +1,4 @@
-import { prisma } from "../lib/prisma.js";
+import { prisma } from "../lib/conexion.js";
 
 export class SalidaService {
 
@@ -9,7 +9,7 @@ export class SalidaService {
     id_paciente: number;
     cantidad: number;
   }) {
-    // Es buena práctica verificar si hay stock suficiente antes de intentar insertar
+    // verificar si hay stock suficiente antes de intentar insertar
     const lote = await prisma.lotes.findUnique({
       where: { id_lote: data.id_lote }
     });
@@ -29,7 +29,6 @@ export class SalidaService {
   }
 
   async registrarSalida(data: any) {
-  // 1. Convertimos explícitamente a números para que Prisma no se queje
   const idLote = Number(data.id_lote);
   const cantidad = Number(data.cantidad);
   const idPaciente = Number(data.id_paciente);
@@ -38,7 +37,7 @@ export class SalidaService {
   // 2. Ahora usamos los valores convertidos en la consulta
   const lote = await prisma.lotes.findUnique({
     where: { 
-      id_lote: idLote // Ahora sí es un Int
+      id_lote: idLote 
     }
   });
 
@@ -55,10 +54,9 @@ export class SalidaService {
     }
   });
 }
-
   // 2. Obtener el historial detallado (Para el reporte de Rodrigo)
   async obtenerHistorial() {
-    // Usamos el SQL que te pasó tu equipo para traer los nombres reales
+
     return await prisma.$queryRaw`
       SELECT 
           s.id_salida,

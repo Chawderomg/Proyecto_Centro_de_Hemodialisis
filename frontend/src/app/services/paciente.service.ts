@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'; // <--- ¡Mantenlo!
 @Injectable({ providedIn: 'root' })
 export class PacienteService {
   //puerta de el lase con el backend
-  private API_URL_REGISTER_PACIENTE = 'http://localhost:3000/api/pacientes/registerPaciente';
+  private API_URL_REGISTER_PACIENTE = 'http://localhost:3000/api/pacientes/registrarPaciente';
 
   constructor(private http: HttpClient) {}
 
@@ -15,7 +15,7 @@ export class PacienteService {
 
  
   getPacientes(): Observable<any> {
-    return this.http.get('http://localhost:3000/api/pacientes/getPaciente');
+    return this.http.get('http://localhost:3000/api/pacientes/listaPaciente');
   }
 ///:id
   actualizarPaciente(id: number | null, datos: any): Observable<any> {
