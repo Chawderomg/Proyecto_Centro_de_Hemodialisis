@@ -15,7 +15,7 @@ export const registrarUsuarios = async (req: Request, res: Response) => {
       return res.status(400).json({ success: false, message: "Faltan datos obligatorios" });
     }
 
-    // Verificar existencia (Uso de lógica delegada al servicio)
+    // Verificar existencia
     const existingUser = await usuarioService.existeCI(String(ci));
     if (existingUser) {
       return res.status(400).json({ success: false, message: "El CI ya está registrado" });
@@ -40,9 +40,7 @@ export const registrarUsuarios = async (req: Request, res: Response) => {
   }
 };
 
-/**
- * 🔐 LOGIN DE USUARIO
- */
+
 export const loginUsuarios = async (req: Request, res: Response) => {
   try {
     const { ci, password } = req.body;
@@ -64,6 +62,7 @@ export const loginUsuarios = async (req: Request, res: Response) => {
     }
 
     const welcomeMessage =  MensajesBienvenida[user.id_rol as RolUsuario] ?? "Bienvenido al sistema";
+    console.log("Mensaje de bienvenida generado:", welcomeMessage);
 
     res.status(200).json({
       success: true,

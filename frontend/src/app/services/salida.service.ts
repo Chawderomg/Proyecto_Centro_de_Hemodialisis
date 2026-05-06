@@ -17,7 +17,7 @@ export class SalidaService {
 
 
   getPacientes(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/pacientes/getPaciente`);
+    return this.http.get(`${this.apiUrl}/pacientes/listaPaciente`);
   }
 
 

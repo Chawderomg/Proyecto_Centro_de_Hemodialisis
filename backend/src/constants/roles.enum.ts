@@ -10,7 +10,6 @@ export interface IUsuarioBase {
   readonly id_rol: RolUsuario;
 }
 
-
 // --- INDEXERS ---
 // Útil para los mensajes de bienvenida sin usar mil IFs
 
