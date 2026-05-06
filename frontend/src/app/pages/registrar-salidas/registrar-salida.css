@@ -1,212 +1,32 @@
-/* ===== CONTENEDOR ===== */
-.registro-container {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 14px;
-  max-width: 480px;
-  margin: 30px auto;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  animation: fadeIn 0.3s ease;
-}
-
-/* TÍTULO */
-.registro-container h2 {
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #2c3e50;
-  text-align: center;
-}
-
-/* LABELS */
-.registro-container label {
-  display: block;
-  margin-bottom: 6px;
-  margin-top: 12px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #555;
-}
-
-
-/* INPUTS Y SELECT */
-.form-control {
-  width: 100%;
-  padding: 11px;
-  border-radius: 8px;
-  border: 1.5px solid #cfd8dc;
-  background: #fafafa;
-  font-size: 14px;
-  transition: all 0.25s ease;
-  box-sizing: border-box;
-}
-
-/* FOCUS */
-.form-control:focus {
-  outline: none;
-  border-color: #1976d2;
-  background: #ffffff;
-  box-shadow: 0 0 0 2px rgba(25,118,210,0.12);
-}
-
-
-/* DISABLED */
-.form-control:disabled {
-  background: #eceff1;
-  cursor: not-allowed;
-}
-
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 11px;
-  border: 1.5px solid #cfd8dc;
-  border-radius: 8px;
-  font-size: 14px;
-  background: #fafafa;
-  transition: all 0.25s ease;
-  box-sizing: border-box;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: #1976d2;
-  background: #fff;
-  box-shadow: 0 0 0 2px rgba(25,118,210,0.12);
-}
-
-
-/* BOTÓN */
- .btn-guardar {
-  width: 100%;
-  margin-top: 20px;
-  background: linear-gradient(135deg, #2196f3, #1976d2);
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.25s;
-}
-
-/* HOVER */
-.btn-guardar:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
-}
-
-/* DISABLED BOTÓN */
-.btn-guardar:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* ANIMACIÓN */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.border-danger {
-  border: 2px solid #dc3545 !important;
-  background-color: #fff8f8;
-}
-
-.text-danger {
-  color: #dc3545 !important;
-  font-weight: bold;
-}
-
-/* Animación opcional para que el error parpadee un poco al aparecer */
-.small {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.tex{
-  background-color: #f5f102;
-}
-
-
-/*TABLA DE SALIDAS*/
+/* =========================================================
+   ===== TABLA PRINCIPAL (tabla-container)
+   ========================================================= */
 .tabla-container {
-  background: #fff;
+  background: #eef2f7;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-h2 {
+.tabla-container h2 {
   margin-bottom: 15px;
   color: #333;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
 
-thead {
-  background: #f3f4f6;
-}
-
-th {
-  text-align: left;
-  padding: 12px;
-  font-weight: 600;
-  color: #555;
-}
-
-td {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-tr:hover {
-  background: #fafafa;
-}
-
-.lote-badge {
-  background: #e0f2fe;
-  color: #0369a1;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-}
-
-.cantidad {
-  font-weight: bold;
-  color: #16a34a;
-}
-
-.loading, .empty {
-  text-align: center;
-  padding: 20px;
-  color: #777;
-}
-
-/*FILTOS DE BUSQUEDA*/
+/* =========================================================
+   ===== FILTROS (aparece arriba de la tabla)
+   ========================================================= */
 .filtros {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
+  align-items: center;
 }
 
 .filtros input,
 .filtros select {
-  
+  padding: 10px;
   border: 1.5px solid #cfd8dc;
   border-radius: 8px;
   background: #fafafa;
@@ -222,15 +42,101 @@ tr:hover {
   box-shadow: 0 0 0 2px rgba(25,118,210,0.12);
 }
 
+/* botón abrir modal */
 
+.btn-open {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-open:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* =========================================================
+   ===== CONTADOR
+   ========================================================= */
 .contador {
   margin-bottom: 10px;
   font-weight: bold;
 }
 
-/* 🎯 colores */
+
+/* =========================================================
+   ===== ESTADOS (loading / vacío)
+   ========================================================= */
+.loading,
+.empty {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}
+
+
+/* =========================================================
+   ===== TABLA
+   ========================================================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+    /*background: #f4f6f9;*/
+    background: white;
+}
+
+thead {
+  background: #f3f4f6;
+  
+}
+
+th {
+  font-weight: 600;
+  color: #555;
+  background: #f8f9fa;
+  padding: 14px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+  background: #fafafa;
+  
+}
+
+/* lote */
+.lote-badge {
+  background: #e3f2fd;
+  color: #0369a1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* colores cantidad */
 .alto {
-  color: green;
+  color: rgb(59, 219, 59);
   font-weight: bold;
 }
 
@@ -244,15 +150,10 @@ tr:hover {
   font-weight: bold;
 }
 
-/* badge lote */
-.lote-badge {
-  background: #e3f2fd;
-  padding: 4px 8px;
-  border-radius: 6px;
-}
 
-
-/* 🔥 fondo oscuro */
+/* =========================================================
+   ===== MODAL (overlay)
+   ========================================================= */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -266,7 +167,7 @@ tr:hover {
   z-index: 9999;
 }
 
-/* 🔥 tarjeta */
+/* tarjeta modal */
 .modal-card {
   background: white;
   padding: 25px;
@@ -275,8 +176,13 @@ tr:hover {
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
 }
 
+
+/* =========================================================
+   ===== HEADER DEL MODAL
+   ========================================================= */
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -285,20 +191,121 @@ tr:hover {
   border-bottom: 1px solid #eee;
   padding-bottom: 8px;
 }
-/* yo */
+
 .modal-header h2 {
   font-size: 18px;
   color: #2c3e50;
   margin: 0;
 }
 
-/* botón */
-.btn-open {
-  background: #1976d2;
-  color: white;
-  padding: 10px 15px;
+/* botón cerrar */
+.btn-cerrar {
+  background: transparent;
   border: none;
-  border-radius: 6px;
-  /*margin-bottom: 15px;*/
+  font-size: 20px;
   cursor: pointer;
 }
+
+
+/* =========================================================
+   ===== FORMULARIO (dentro del modal)
+   ========================================================= */
+.modal-card label {
+  display: block;
+  margin: 12px 0 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  border: 1.5px solid #cfd8dc;
+  background: #fafafa;
+  font-size: 14px;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #1976d2;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(25,118,210,0.12);
+}
+
+.form-control:disabled {
+  background: #eceff1;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   ===== MENSAJES Y VALIDACIONES
+   ========================================================= */
+.border-danger {
+  border: 2px solid #dc3545 !important;
+  background-color: #fff8f8;
+}
+
+.text-danger {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.text-warning {
+  color: #454758;
+  font-weight: 500;
+}
+
+.tex {
+  background-color: #f5f102;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+
+/* =========================================================
+   ===== BOTÓN GUARDAR
+   ========================================================= */
+.btn-guardar {
+  width: 100%;
+  margin-top: 20px;
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn-guardar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+.btn-guardar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   ===== ANIMACIÓN GLOBAL
+   ========================================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

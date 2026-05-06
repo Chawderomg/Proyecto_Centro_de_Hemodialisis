@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
-import { SalidaService } from "../service/salida.service.js";
+import { SalidaService } from "../servicio/salida.service.js";
+
 
 const salidaService = new SalidaService();
 

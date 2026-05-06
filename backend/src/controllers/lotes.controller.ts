@@ -2,7 +2,7 @@
 
 
 import type{ Request, Response } from "express";
-import { LoteService } from "../service/lotes.service.js";
+import { LoteService } from "../servicio/lotes.service.js";
 
 const loteService = new LoteService();
 

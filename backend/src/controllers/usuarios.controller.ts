@@ -1,28 +1,36 @@
+
 import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import { Role } from "../constants/roles.enum.js"; 
-
-import { UsuarioService } from "../service/usuario.service.js";
+import { UsuarioService } from "../servicio/usuario.service.js";
+import { eventosUsuario ,usuarioEvents} from "../evento/usuario.evento.js";
+import { MensajesBienvenida, RolUsuario } from "../constants/roles.enum.js";
 
 const usuarioService = new UsuarioService();
-export const registerUser = async (req: Request, res: Response) => {
+
+export const registrarUsuarios = async (req: Request, res: Response) => {
   try {
     const { ci, nombre_completo, password, id_rol } = req.body;
 
-    if (!ci || !nombre_completo || !password || !id_rol) {
-      return res.status(400).json({ success: false, message: "Faltan datos" });
+    if (!ci || !nombre_completo || !password || id_rol == null) {
+      return res.status(400).json({ success: false, message: "Faltan datos obligatorios" });
     }
 
+    // Verificar existencia
     const existingUser = await usuarioService.existeCI(String(ci));
     if (existingUser) {
-      return res.status(400).json({ success: false, message: "CI ya existe" });
+      return res.status(400).json({ success: false, message: "El CI ya está registrado" });
     }
 
+    // Crear usuario
     const newUser = await usuarioService.crearUsuario({
       ci: String(ci),
       nombre_completo,
       password,
-      id_rol:Number(id_rol),
+      id_rol: Number(id_rol),
+    });
+
+    setImmediate(() => {
+      usuarioEvents.emit("usuarioCreado", newUser.nombre_completo);
     });
 
     res.status(201).json({ success: true, user: newUser });
@@ -33,7 +41,7 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUsuarios = async (req: Request, res: Response) => {
   try {
     const { ci, password } = req.body;
 
@@ -47,20 +55,14 @@ export const loginUser = async (req: Request, res: Response) => {
       return res.status(404).json({ success: false, message: "Usuario no encontrado" });
     }
 
+    // Validación de password
     const isPasswordValid = await bcrypt.compare(password, user.password_hash);
     if (!isPasswordValid) {
       return res.status(401).json({ success: false, message: "Credenciales inválidas" });
     }
 
-
-    // --- APLICACIÓN DEL ENUM ---
-    let welcomeMessage = "Bienvenido al sistema";
-    
-    if (user.id_rol === Role.ADMIN) {
-      welcomeMessage = "Bienvenido, Administrador Principal";
-    } else if (user.id_rol === Role.ALMACEN) {
-      welcomeMessage = "Acceso concedido al Inventario de Insumos";
-    }
+    const welcomeMessage =  MensajesBienvenida[user.id_rol as RolUsuario] ?? "Bienvenido al sistema";
+    console.log("Mensaje de bienvenida generado:", welcomeMessage);
 
     res.status(200).json({
       success: true,
@@ -75,61 +77,45 @@ export const loginUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
-
-
-
 };
 
-
-export const getUsuarios = async (req: Request, res: Response) => {
+export const listarUsuarios = async (_req: Request, res: Response) => {
   try {
-
     const usuarios = await usuarioService.obtenerUsuarios();
 
-    res.status(200).json({
-      success: true,
-      data: usuarios
-    });
+    // --- EXPRESIÓN LAMBDA CORREGIDA ---
+    // Mantenemos los nombres originales: nombre_completo y ci
+    const dataLimpia = usuarios.map(u => ({
+      id_usuario: u.id_usuario,
+      nombre_completo: u.nombre_completo,
+      ci: u.ci,
+      rol: u.roles?.id_rol || 'Sin Rol' // Usamos el nombre del rol vinculado
+    }));
 
+    res.status(200).json({ success: true, data: dataLimpia });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message
-    });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const updateUsuario = async (req: Request, res: Response) => {
+
+export const actualizarUsuarios = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { ci, nombre_completo, password, id_rol } = req.body;
-
-   /* if (!ci || !nombre_completo) {
-      return res.status(400).json({
-        success: false,
-        message: "CI y nombre son obligatorios"
-      });
-    }*/
-
+    
+    // Verificamos si existe antes de intentar editar
     const usuarioExistente = await usuarioService.buscarPorId(Number(id));
-
     if (!usuarioExistente) {
-      return res.status(404).json({
-        success: false,
-        message: "Usuario no encontrado"
-      });
+      return res.status(404).json({ success: false, message: "Usuario no encontrado" });
     }
 
-    const actualizado = await usuarioService.actualizarUsuario(Number(id), {
-      ci,
-      nombre_completo,
-      password,
-      id_rol:Number(id_rol),
-    });
+    // --- MÉTODOS PARCIALES (Partial) ---
+    // Enviamos req.body tal cual; el servicio se encarga de procesar solo lo que venga
+    const actualizado = await usuarioService.actualizarUsuario(Number(id), req.body);
 
     res.status(200).json({
       success: true,
-      message: "Usuario actualizado",
+      message: "Usuario actualizado correctamente",
       data: actualizado
     });
 
@@ -138,26 +124,19 @@ export const updateUsuario = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteUsuario = async (req: Request, res: Response) => {
+
+export const eliminarUsuarios = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
     const usuarioExistente = await usuarioService.buscarPorId(Number(id));
-
     if (!usuarioExistente) {
-      return res.status(404).json({
-        success: false,
-        message: "Usuario no encontrado"
-      });
+      return res.status(404).json({ success: false, message: "Usuario no encontrado" });
     }
 
     await usuarioService.eliminarUsuario(Number(id));
 
-    res.status(200).json({
-      success: true,
-      message: "Usuario eliminado correctamente"
-    });
-
+    res.status(200).json({ success: true, message: "Usuario eliminado" });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }

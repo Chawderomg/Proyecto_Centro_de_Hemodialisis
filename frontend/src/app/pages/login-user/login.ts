@@ -26,19 +26,16 @@ export class LoginUser {
     this.usuarioService.login(credenciales).subscribe({
       next: (res) => {
         if (res.success) {
-          // Guardamos el nombre en el navegador para usarlo en el saludo de la otra página
           localStorage.setItem('userName', res.user.nombre);
           
           const rolUsuario = res.user.rol;
 
-          // Lógica de redirección por roles
           switch (rolUsuario) {
             case 'Administrador':
               this.router.navigate(['/admin']);
               break;
             
             case 'Enfermeria':
-              // Aunque no existan todavía, ya dejamos la lógica lista
               console.log('Redirigiendo a panel de Enfermería...');
               this.router.navigate(['/enfermeria']);
               break;
@@ -55,7 +52,6 @@ export class LoginUser {
         }
       },
       error: (err) => {
-        // Captura los errores del backend (401, 404, etc.)
         this.errorMessage.set(err.error?.message || 'Error de conexión con el servidor');
       }
     });

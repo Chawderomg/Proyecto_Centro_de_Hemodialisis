@@ -79,7 +79,24 @@
 }
 
 
-.btn-register {
+/* ===== BOTONES ===== */
+.boton-registrar{
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.boton-registrar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.boton-guardar {
   width: 40%;
   padding: 10px;
   background-color: #546e7a;
@@ -92,7 +109,7 @@
   transition: background 0.3s;
 }
 
-.btn-register:hover {
+.boton-guardar:hover {
   background: #334155;
 }
 
@@ -105,38 +122,29 @@
 
 .success-text {
   color: #388e3c;
-  font-size: 0.85rem;
+  font-size: 0.5rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
 .navbar-actions {
-  display: flex;              /* Activa flexbox */
-  justify-content: space-between; /* Distribuye los elementos a los extremos */
-  align-items: center;        /* Centra verticalmente */
-  gap: 1rem;                  /* Espacio entre elementos */
-  padding: 0.5rem 2rem;       /* Opcional: margen interno */
-  background-color: #f5f5f5;  /* Opcional: color de fondo */
+  display: flex;            
+  justify-content: space-between; 
+  align-items: center;        
+  gap: 1rem;                  
+  padding: 0.5rem 2rem;       
+  background-color: #eef2f7;  
   border-radius: 6px; 
-  margin: 15px;        /* Opcional: esquinas redondeadas */
+  margin: 10px;       
 }
-/* Botón */
-.navbar-actions .btn-open {
-  background-color: #007bff;  /* Color del botón */
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-/* input de Busqqueda*/
+
 
 .navbar-actions .input-search {
-  flex: 1;                    /* El input ocupa el espacio disponible */
-  max-width: 300px;           /* Limita el ancho */
+  flex: 1;                   
+  max-width: 300px;           
   padding: 0.5rem;
-
-  border: 1.5px solid #cfd8dc;
+  font-size: 1rem;
+  border: 1.5px solid #dcd2cf;
   border-radius: 8px;
   transition: border-color 0.3s;
   box-sizing: border-box;
@@ -158,7 +166,7 @@ th, td {
 }
 
 th {
-  background: #f5f5f5;
+  background: #eef2f7;
   
 }
 
@@ -174,7 +182,7 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* 🔥 CLAVE */
+  z-index: 9999; 
 
 }
 .modal-backdrop {
@@ -226,4 +234,52 @@ th {
 /*Funciones de nuebos implementos*/
 .stock-bajo {
   background-color: #c40e0e;
+}
+.acciones { text-align: right; }
+
+.accion {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+
+.icono {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+
+.icono.edit {
+  background: #e8f0ff;    
+  color: #0a84ff;        
+}
+.icono.delete {
+  background: #ffecec;   
+  color: #e02424;         
+}
+
+/* tamaño del svg dentro del círculo */
+.icono svg { width: 16px; height: 16px; }
+
+/* hover / focus */
+.icono:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(10,132,255,0.08); }
+.icono.delete:hover { box-shadow: 0 6px 18px rgba(224,36,36,0.08); }
+.icono:focus { outline: 2px solid rgba(10,132,255,0.18); outline-offset: 2px; }
+
+/* variante: borde en lugar de fondo (opcional) */
+.icono.outline {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.06);
+  color: #333;
 }

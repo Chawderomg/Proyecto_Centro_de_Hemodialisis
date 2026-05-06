@@ -1,13 +1,13 @@
 <div class="navbar-actions">
   <!-- 🔹 BOTÓN -->
-  <button class="btn-open" (click)="abrirModal()">
+  <button class="boton-registrar" (click)="abrirModal()">
     + Registrar Paciente
   </button>
 
   <!-- 🔹 BUSCADOR -->
   <input 
     type="text"
-    placeholder="🔍 Buscar paciente..."
+    placeholder=" Buscar paciente..."
     [ngModel]="busqueda()"
     (ngModelChange)="busqueda.set($event)"
     class="input-search"
@@ -32,11 +32,30 @@
         <td>{{ paciente.nombre_completo }}</td>
         <td>{{ paciente.ci }}</td>
 
-        <!-- 🔥 AQUÍ VA -->
         <td class="acciones">
-          <button (click)="editarPaciente(paciente)">✏️</button>
-          <button (click)="eliminarPaciente(paciente.id_paciente)">🗑️</button>
-        </td>
+  <button class="accion icono edit"
+          (click)="editarPaciente(paciente)"
+          aria-label="Editar paciente"
+          title="Editar">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 21v-3.75L14.06 6.19a2 2 0 0 1 2.83 0l1.92 1.92a2 2 0 0 1 0 2.83L7.75 22H3z"></path>
+      <path d="M14 6l4 4"></path>
+    </svg>
+  </button>
+
+  <button class="accion icono delete"
+          (click)="eliminarPaciente(paciente.id_paciente)"
+          aria-label="Eliminar paciente"
+          title="Eliminar">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="3 6 5 6 21 6"></polyline>
+      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+      <path d="M10 11v6"></path>
+      <path d="M14 11v6"></path>
+      <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+    </svg>
+  </button>
+</td>
 
       </tr>
     }
@@ -87,10 +106,10 @@
         }
 
          <div class="modal-actions">
-            <button class="btn-register" type="submit">
+            <button class="boton-guardar" type="submit">
               {{ modoEdicion() ? 'Actualizar' : 'Guardar' }}
             </button>
-            <button class="btn-register" type="button" (click)="cerrarModal()">Cancelar</button>
+            <button class="boton-guardar" type="button" (click)="cerrarModal()">Cancelar</button>
           </div>  
 
       </form>

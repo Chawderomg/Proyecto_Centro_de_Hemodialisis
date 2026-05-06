@@ -1,5 +1,5 @@
 import type{ Request, Response } from "express";
-import { InsumoService } from "../service/insumo.service.js";
+import { InsumoService } from "../servicio/insumo.service.js";
 
 const insumoService = new InsumoService();
 

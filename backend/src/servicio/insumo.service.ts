@@ -1,15 +1,15 @@
-import { prisma } from "../lib/prisma.js";
+import { prisma as conexion } from "../lib/conexion.js";
 
 export class InsumoService {
 
   async existeCodigo(codigo: string) {
-    return prisma.insumos.findUnique({
+    return conexion.insumos.findUnique({
       where: { codigo_interno: codigo }
     });
   }
 
   async crearInsumo(data: any) {
-    return prisma.insumos.create({
+    return conexion.insumos.create({
       data: {
         codigo_interno: data.codigo_interno,
         nombre: data.nombre,
@@ -19,19 +19,19 @@ export class InsumoService {
   }
 
   async obtenerInsumos() {
-    return prisma.insumos.findMany({
+    return conexion.insumos.findMany({
       orderBy: { creado_en: "desc" }
     });
   }
 
   async buscarPorId(id: number) {
-    return prisma.insumos.findUnique({
+    return conexion.insumos.findUnique({
       where: { id_insumo: id }
     });
   }
 
   async actualizarInsumo(id: number, data: any) {
-    return prisma.insumos.update({
+    return conexion.insumos.update({
       where: { id_insumo: id },
       data: {
         codigo_interno: data.codigo_interno,
@@ -42,14 +42,14 @@ export class InsumoService {
   }
 
   async eliminarInsumo(id: number) {
-    return prisma.insumos.delete({
+    return conexion.insumos.delete({
       where: { id_insumo: id }
     });
   }
 
   // STOCK TOTAL
   async getStockTotal() {
-    const insumos = await prisma.insumos.findMany({
+    const insumos = await conexion.insumos.findMany({
       include: { lotes: true }
     });
 
@@ -62,7 +62,7 @@ export class InsumoService {
 
   // DASHBOARD
   async getDashboard() {
-    const insumos = await prisma.insumos.findMany({
+    const insumos = await conexion.insumos.findMany({
       include: {
         lotes: { where: { cantidad_disponible: { gt: 0 } } }
       }
@@ -95,7 +95,7 @@ export class InsumoService {
 
   // BAJO STOCK
   async getBajoStock() {
-    const insumos = await prisma.insumos.findMany({
+    const insumos = await conexion.insumos.findMany({
       include: { lotes: true }
     });
 

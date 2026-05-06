@@ -5,8 +5,8 @@ import { Observable } from 'rxjs'; // <--- ¡Mantenlo!
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
   //puerta de el lase con el backend
-  private API_URL_REGISTER = 'http://localhost:3000/api/usuarios/register';
-  private API_URL_LOGIN = 'http://localhost:3000/api/usuarios/login'; // <--- Nueva URL
+  private API_URL_REGISTER = 'http://localhost:3000/api/usuarios/registrarUsuario';
+  private API_URL_LOGIN = 'http://localhost:3000/api/usuarios/loginUsuario'; 
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +20,7 @@ export class UsuarioService {
   }
 
   getUsuarios(): Observable<any> {
-    return this.http.get('http://localhost:3000/api/usuarios/getUsuario');
+    return this.http.get('http://localhost:3000/api/usuarios/listaUsuari');
   }
 ///:id
   actualizarUsuario(id: number | null, datos: any): Observable<any> {

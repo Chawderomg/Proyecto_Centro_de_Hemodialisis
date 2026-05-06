@@ -2,7 +2,6 @@
 
   <aside class="admin-sidebar" [class.collapsed]="isCollapsed">
 
-    <!-- HEADER -->
     <div class="sidebar-header">
       <button class="toggle-btn" (click)="toggleSidebar()">
         <svg viewBox="0 0 24 24">
@@ -13,7 +12,6 @@
       <span *ngIf="!isCollapsed">Panel Administrativo</span>
     </div>
 
-    <!-- NAV -->
     <nav class="admin-nav">
 
       <a routerLink="registrar-usuario" 
@@ -38,7 +36,7 @@
         <span *ngIf="!isCollapsed">Entrada de Lotes</span>
       </a>
 
-      <a routerLink="registrar-cat" 
+      <a routerLink="registrar-insumos" 
          routerLinkActive="active-tab"
          class="nav-tab">
 
@@ -87,7 +85,6 @@
 
   </aside>
 
-  <!-- CONTENT -->
   <main class="admin-content">
 
     <header class="content-header">

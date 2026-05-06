@@ -1,9 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import pg from "pg";
-import dotenv from "dotenv";
-
-dotenv.config();
+import "dotenv/config";   // ← Más limpio que dotenv.config()
 
 const dbUrl = process.env.DATABASE_URL;
 
@@ -11,7 +9,7 @@ const dbUrl = process.env.DATABASE_URL;
 class PrismaSingleton {
   private static instance: PrismaClient;
 
-  private constructor() {} // Evita que alguien haga "new PrismaSingleton()"
+  private constructor() {} 
 
   public static getInstance(): PrismaClient {
     if (!PrismaSingleton.instance) {
