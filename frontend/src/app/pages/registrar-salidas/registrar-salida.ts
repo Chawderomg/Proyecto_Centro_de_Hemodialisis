@@ -1,8 +1,8 @@
 
 import { Component,signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormControl, FormsModule, Validators } from '@angular/forms'; 
-import { ChangeDetectorRef } from '@angular/core'; // 1. Importar
+import { ReactiveFormsModule,  FormsModule} from '@angular/forms'; 
+import { ChangeDetectorRef } from '@angular/core'; 
 
 import { SalidaService } from '../../services/salida.service';
 
@@ -27,7 +27,7 @@ export class RegistrarSalida implements OnInit {
    historial: any[] = [];
   cargando = true;
   
-  // Objeto que se enviará al backend
+  // Objeto que se enviara al backend
   nuevaSalida = {
   id_paciente: null,
   id_insumo: null, 
@@ -40,7 +40,7 @@ export class RegistrarSalida implements OnInit {
 
   constructor(
     private salidaService: SalidaService, 
-    private cdr: ChangeDetectorRef // 2. Inyectar  // Agregado
+    private cdr: ChangeDetectorRef 
   ) { }
   ngOnInit() {
     this.cargarDatos();
@@ -90,12 +90,12 @@ export class RegistrarSalida implements OnInit {
 }
   
   
-    // Modificamos la lógica de selección de lote
+  
   onSeleccionarLote(idLote: any) {
     const lote = this.lotesFiltrados.find(l => l.id_lote == idLote);
     if (lote) {
       this.stockMaximo = lote.cantidad_disponible;
-      this.validarCantidad(); // Validamos de inmediato
+      this.validarCantidad(); 
     }
   }
 
@@ -111,7 +111,7 @@ export class RegistrarSalida implements OnInit {
     this.salidaService.registrarSalida(this.nuevaSalida).subscribe({
       next: (res) => {
         alert("Salida registrada. El stock se actualizó automáticamente.");
-        // Aquí podrías resetear el formulario o redirigir al historial
+
         this.cargarDatos();
         this.resetForm();
       },
@@ -134,12 +134,11 @@ export class RegistrarSalida implements OnInit {
     });
   }
 
-  // 🔍 FILTROS
+  //FILTROS
 busqueda = '';
 filtroPaciente = '';
 filtroFecha = '';
 
-// 🔥 COMPUTED (tabla filtrada)
 get historialFiltrado() {
   return this.historial.filter(item => {
 
@@ -160,7 +159,7 @@ get historialFiltrado() {
 }
 
 
-// 🔥 CONTROL MODAL
+
 mostrarModal = false;
 
 abrirModal() {
@@ -184,7 +183,7 @@ cerrarModal() {
   this.lotesFiltrados = [];
   this.stockMaximo = 0;
   this.errorStock = false;
-  this.cdr.detectChanges(); // Forzamos a que la interfaz se limpie visualmente
+  this.cdr.detectChanges(); 
 }
 
 }

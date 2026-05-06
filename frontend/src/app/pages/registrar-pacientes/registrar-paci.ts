@@ -26,14 +26,14 @@ export class CreatePaciente implements OnInit {
   successMessage = signal('');
   idEditando = signal<number | null>(null);
 
-  // 🔥 FORM
+  
   paciForm = new FormGroup({
     nombre_completo: new FormControl('', [Validators.required]),
     ci: new FormControl('', [Validators.required]),
     es_activo: new FormControl(true),
   });
 
-  // 🔥 INIT
+
   ngOnInit() {
     this.cargarPacientes();
   }
@@ -46,7 +46,7 @@ export class CreatePaciente implements OnInit {
     });
   }
 
-  // 🔍 FILTRO
+  //FILTRO
 pacientesFiltrados = computed(() => {
   const texto = this.busqueda().toLowerCase();
 

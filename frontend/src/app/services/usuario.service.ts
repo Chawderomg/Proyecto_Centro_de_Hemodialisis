@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'; // <--- ¡Mantenlo!
 export class UsuarioService {
   //puerta de el lase con el backend
   private API_URL_REGISTER = 'http://localhost:3000/api/usuarios/registrarUsuario';
-  private API_URL_LOGIN = 'http://localhost:3000/api/usuarios/loginUsuario'; // <--- Nueva URL
+  private API_URL_LOGIN = 'http://localhost:3000/api/usuarios/loginUsuario'; 
 
   constructor(private http: HttpClient) {}
 

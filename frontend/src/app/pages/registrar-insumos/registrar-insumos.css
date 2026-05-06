@@ -128,14 +128,14 @@
 }
 
 .navbar-actions {
-  display: flex;              /* Activa flexbox */
-  justify-content: space-between; /* Distribuye los elementos a los extremos */
-  align-items: center;        /* Centra verticalmente */
-  gap: 1rem;                  /* Espacio entre elementos */
-  padding: 0.5rem 2rem;       /* Opcional: margen interno */
-  background-color: #eef2f7;  /* Opcional: color de fondo */
+  display: flex;            
+  justify-content: space-between; 
+  align-items: center;        
+  gap: 1rem;                  
+  padding: 0.5rem 2rem;       
+  background-color: #eef2f7;  
   border-radius: 6px; 
-  margin: 10px;        /* Opcional: esquinas redondeadas */
+  margin: 10px;       
 }
 
 
@@ -182,7 +182,7 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* 🔥 CLAVE */
+  z-index: 9999; 
 
 }
 .modal-backdrop {
@@ -249,7 +249,7 @@ th {
   vertical-align: middle;
 }
 
-/* contenedor circular coloreado */
+
 .icono {
   width: 34px;
   height: 34px;
@@ -260,14 +260,13 @@ th {
   box-shadow: 0 1px 0 rgba(0,0,0,0.04);
 }
 
-/* colores por tipo (fondo) y color del trazo del svg */
 .icono.edit {
-  background: #e8f0ff;    /* fondo azul claro */
-  color: #0a84ff;         /* color del icono (currentColor) */
+  background: #e8f0ff;    
+  color: #0a84ff;        
 }
 .icono.delete {
-  background: #ffecec;    /* fondo rojo claro */
-  color: #e02424;         /* color del icono */
+  background: #ffecec;   
+  color: #e02424;         
 }
 
 /* tamaño del svg dentro del círculo */
